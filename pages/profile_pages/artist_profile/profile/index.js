@@ -15,7 +15,7 @@ import axios from 'axios';
 import {getLogin} from '../../../../fetchdata/loginFetcher'
 import {getUser} from '../../../../fetchdata/registerFetcher'
 
-export default function Artist(props) {
+export default function Artistt(props) {
   const router = useRouter()
   const[session, loading] = useSession();
   const {logins, isLoading, isError} = getLogin(props.email) 
@@ -152,7 +152,7 @@ const onSearch = async(value) =>{
 
         {musicart && (
           <>
-            <Artist id={responsee.data._id} logins ={logins} />
+            <Artistt id={responsee.data._id} logins ={logins} />
           </>
         )}  
 
@@ -172,7 +172,7 @@ const onSearch = async(value) =>{
   );
 }
 
-Artist.getInitialProps =  ({query}) =>{
+Artistt.getInitialProps =  ({query}) =>{
   const email = query.sect
   return {
     email : email
