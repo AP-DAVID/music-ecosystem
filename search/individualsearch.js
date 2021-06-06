@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Navbar from "../components/Navbars/AuthNavbar.js";
 import Footer from "../components/Footers/Footer.js";
-import Body from '../body/individualbody'
+import Body from '../body/individualBody'
 import {useRouter} from 'next/router'
 import axios from 'axios'
 import {getUser} from '../fetchdata/registerFetcher'
