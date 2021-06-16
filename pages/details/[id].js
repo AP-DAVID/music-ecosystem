@@ -1,6 +1,6 @@
 import bg5 from '../../assets/img/bg5.jpg'
 import { Input } from 'antd';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import {signOut, useSession } from "next-auth/client";
 import axios from 'axios';
@@ -10,6 +10,8 @@ const Details = () => {
 
     const { TextArea } = Input;
     const router = useRouter()
+    const[session, loading] = useSession();
+
     const { id } = router.query
      const {register, isLoading, isError} = getUser(id)
     const [form, setForm] = useState(
@@ -42,8 +44,13 @@ const handleSubmit = async(e) =>{
 
     try{
       const response = await axios.put(`/api/register/${id}`, form, config)
-      await signOut();
-      router.push('/logins/login')
+      if(!session){
+        router.push('/logins/login')
+      }
+      if(session){
+       await signOut()
+        router.push('/logins/login')
+      }
 
      
       
@@ -56,7 +63,17 @@ const handleSubmit = async(e) =>{
 }
    
     if(isError){return (<p>An error Occured</p>)}
-    if(isLoading){return (<h1>loading..</h1>)}
+    if(isLoading){
+      return (
+        <div class="ui segment" style={{display: "flex", flexDirection : "column", justifyContent : "center", height : '100vh' }}>
+            <div class="ui active dimmer"style={{display: "flex", flexDirection : "row", justifyContent : "center", height : '100vh' }}>
+              <div class="ui huge text loader">Loading</div>
+            </div>
+          <p></p>
+          <p></p>
+      </div>
+
+    )}
 
     return (
       <div className="bg-cover bg-center ..." style={{height:"100vh", backgroundImage:`url(${bg5})` }}>

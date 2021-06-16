@@ -15,6 +15,7 @@ import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import {getLogin} from '../../../../fetchdata/loginFetcher'
 import {getUser} from '../../../../fetchdata/registerFetcher'
+import Sbody from "../../../../search/bodysearch"
 
 export default function Videographer(props) {
   const router = useRouter()
@@ -22,6 +23,7 @@ export default function Videographer(props) {
   const[session, loading] = useSession();
   const {logins, isLoading, isError} = getLogin(props.email) 
   const [responsee, setResponse] = useState()
+  const[bsearch, setSearch] = useState(false);
   const[content, setContent] = useState(true);
   const[iu, setIU] = useState(false)
   const[musicart, setMusicart] = useState(false);
@@ -59,12 +61,20 @@ const onSearch = async(value) =>{
     })
       await setResponse(response);
       setContent(false);
+
+      if(response.data.status === 404){
+        setSearch(true)
+      }
+     
+
+
       if (response.data.section === "individual user") {
 
         setIU(true)
         setMusicart(false)
         setLabel(false)
         setVideogr(false)
+        setSearch(false)
       
       };
       if (response.data.section === "music artist") {
@@ -72,18 +82,21 @@ const onSearch = async(value) =>{
         setIU(false)
         setLabel(false)
         setVideogr(false)
+        setSearch(false)
       };
       if (response.data.section === "record label") {
         setLabel(true)
         setMusicart(false)
         setIU(false)
         setVideogr(false)
+        setSearch(false)
       };
       if (response.data.section === "videographer") {
         setVideogr(true)
         setLabel(false)
         setMusicart(false)
         setIU(false)
+        setSearch(false)
       };
       
       
@@ -100,9 +113,31 @@ const onSearch = async(value) =>{
 
 
   if(isError){return (<p>An error Occured</p>)}
-  if(isLoading){return (<h1>loading..</h1>)}
+  if(isLoading){
+    return (
+      <div class="ui segment" style={{display: "flex", flexDirection : "column", justifyContent : "center", height : '100vh' }}>
+            <div class="ui active dimmer"style={{display: "flex", flexDirection : "row", justifyContent : "center", height : '100vh' }}>
+              <div class="ui huge text loader">Loading</div>
+            </div>
+          <p></p>
+          <p></p>
+      </div>
+    )}
 
-  if (!session){
+  if(loading){
+    return (
+      <div class="ui segment" style={{display: "flex", flexDirection : "column", justifyContent : "center", height : '100vh' }}>
+            <div class="ui active dimmer"style={{display: "flex", flexDirection : "row", justifyContent : "center", height : '100vh' }}>
+              <div class="ui huge text loader">Loading</div>
+            </div>
+          <p></p>
+          <p></p>
+      </div>
+  )
+  }
+
+
+  if (!session && !loading){
     return (
         <main>
             <div>
@@ -175,6 +210,12 @@ const onSearch = async(value) =>{
             <Videography id={responsee.data._id} logins ={logins} />
           </>
         )}  
+        {bsearch && (
+          <>
+            <Sbody svg="/search.svg" />
+          </>
+        )}  
+    
     
     </Admin>
   );

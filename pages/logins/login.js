@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Header } from 'semantic-ui-react'
 import Image from 'next/image'
 
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import axios from 'axios';
 import { useRouter } from 'next/router'
 
@@ -45,55 +45,65 @@ const handleSubmit = async(e) =>{
     
 }
 
-const bom = async () => {
+useEffect(() =>{
+  if(session){
+    const bom = async () => {
   
     
-    const config = {
-    headers: {
-        "Accept" : "application/json",
-        'Content-type' : "application/json"
+      const config = {
+      headers: {
+          "Accept" : "application/json",
+          'Content-type' : "application/json"
+      }
     }
+  
+      try{
+        setForm2(form2.email = session.user.email)
+        console.log(form.email)
+        const response = await axios.post('/api/users/', JSON.stringify(form2) , config)
+    
+      if(response.data.section === "individual user"){
+        router.push({
+          pathname: '/profile_pages/users_profile/profile',
+          query: {sect : session.user.email}
+      })
+      }
+      
+      if(response.data.section === "music artist"){
+        router.push({
+          pathname: '/profile_pages/artist_profile/profile',
+          query: {sect : session.user.email}
+      })
+      
+      }
+      
+      if(response.data.section === "record label"){
+        router.push({
+          pathname: '/profile_pages/label_profile/profile',
+          query: {sect : session.user.email}
+      })
+      }
+  
+      if(response.data.section === "videographer"){
+        router.push({
+          pathname: '/profile_pages/videographer_profile/profile',
+          query: {sect : session.user.email}
+      })
+      }
+        
+        
+      }catch(error){
+          console.log(error)
+      }
   }
+  bom()
+  }
+  else{
+    console.log("no session yet")
+  }
+},[session])
 
-    try{
-      setForm2(form2.email = session.user.email)
-      console.log(form.email)
-      const response = await axios.post('/api/users/', JSON.stringify(form2) , config)
-  
-    if(response.data.section === "individual user"){
-      router.push({
-        pathname: '/profile_pages/users_profile/profile',
-        query: {sect : session.user.email}
-    })
-    }
-    
-    if(response.data.section === "music artist"){
-      router.push({
-        pathname: '/profile_pages/artist_profile/profile',
-        query: {sect : session.user.email}
-    })
-    
-    }
-    
-    if(response.data.section === "record label"){
-      router.push({
-        pathname: '/profile_pages/label_profile/profile',
-        query: {sect : session.user.email}
-    })
-    }
 
-    if(response.data.section === "videographer"){
-      router.push({
-        pathname: '/profile_pages/videographer_profile/profile',
-        query: {sect : session.user.email}
-    })
-    }
-      
-      
-    }catch(error){
-        console.log(error)
-    }
-}
 
 
 
@@ -238,7 +248,18 @@ const bom = async () => {
     )}
 
         {
-           session && bom()
+           session && (
+            
+
+          <div class="ui segment" style={{display: "flex", flexDirection : "column", justifyContent : "center", height : '100vh' }}>
+            <div class="ui active dimmer"style={{display: "flex", flexDirection : "row", justifyContent : "center", height : '100vh' }}>
+              <div class="ui huge text loader">Loading</div>
+            </div>
+          <p></p>
+          <p></p>
+          </div>
+
+           )
             
            
          }

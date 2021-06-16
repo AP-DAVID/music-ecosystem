@@ -14,6 +14,7 @@ import {signOut, useSession } from "next-auth/client";
 import axios from 'axios';
 import {getLogin} from '../../../../fetchdata/loginFetcher'
 import {getUser} from '../../../../fetchdata/registerFetcher'
+import Sbody from "../../../../search/bodysearch"
 
 export default function Artistt(props) {
   const router = useRouter()
@@ -25,6 +26,7 @@ export default function Artistt(props) {
   const[musicart, setMusicart] = useState(false);
   const[label, setLabel] = useState(false);
   const[videogr, setVideogr] = useState(false);
+  const[bsearch, setSearch] = useState(false);
 
   const [form, setForm] = useState(
     {
@@ -55,12 +57,21 @@ const onSearch = async(value) =>{
     })
       await setResponse(response);
       setContent(false);
+      console.log(response)
+
+      if(response.data.status === 404){
+        setSearch(true)
+      }
+     
+
+
       if (response.data.section === "individual user") {
 
         setIU(true)
         setMusicart(false)
         setLabel(false)
         setVideogr(false)
+        setSearch(false)
       
       };
       if (response.data.section === "music artist") {
@@ -68,18 +79,21 @@ const onSearch = async(value) =>{
         setIU(false)
         setLabel(false)
         setVideogr(false)
+        setSearch(false)
       };
       if (response.data.section === "record label") {
         setLabel(true)
         setMusicart(false)
         setIU(false)
         setVideogr(false)
+        setSearch(false)
       };
       if (response.data.section === "videographer") {
         setVideogr(true)
         setLabel(false)
         setMusicart(false)
         setIU(false)
+        setSearch(false)
       };
       
       
@@ -93,9 +107,31 @@ const onSearch = async(value) =>{
 
 
   if(isError){return (<p>An error Occured</p>)}
-  if(isLoading){return (<h1>loading..</h1>)}
+  if(isLoading){
+    return (
+      <div class="ui segment" style={{display: "flex", flexDirection : "column", justifyContent : "center", height : '100vh' }}>
+            <div class="ui active dimmer"style={{display: "flex", flexDirection : "row", justifyContent : "center", height : '100vh' }}>
+              <div class="ui huge text loader">Loading</div>
+            </div>
+          <p></p>
+          <p></p>
+      </div>
+      
+    )}
 
-  if (!session){
+  if(loading){
+    return (
+      <div class="ui segment" style={{display: "flex", flexDirection : "column", justifyContent : "center", height : '100vh' }}>
+            <div class="ui active dimmer"style={{display: "flex", flexDirection : "row", justifyContent : "center", height : '100vh' }}>
+              <div class="ui huge text loader">Loading</div>
+            </div>
+          <p></p>
+          <p></p>
+      </div>
+  )
+  }
+
+  if (!session && !loading){
     return (
         <main>
             <div>
@@ -133,7 +169,7 @@ const onSearch = async(value) =>{
   
   
   return (
-    <Admin goHome={goHome} userName={logins.username} onSearch={onSearch}>
+    <Admin goHome={goHome} onLogout={onLogout}  userName={logins.username} onSearch={onSearch}>
       
        {content && (
         <>
@@ -165,6 +201,12 @@ const onSearch = async(value) =>{
         {videogr && (
           <>
             <Videography id={responsee.data._id} logins ={logins} />
+          </>
+        )}  
+
+       {bsearch && (
+          <>
+            <Sbody svg="/search.svg" />
           </>
         )}  
     

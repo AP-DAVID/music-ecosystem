@@ -45,7 +45,17 @@ export default function Label({id, logins}) {
 
 
   if(isError){return (<p>An error Occured</p>)}
-  if(isLoading){return (<h1>loading..</h1>)}
+  if(isLoading){
+    return (
+      <div class="ui segment" style={{display: "flex", flexDirection : "column", justifyContent : "center", height : '100vh' }}>
+          <div class="ui active inverted dimmer"style={{display: "flex", flexDirection : "row", justifyContent : "center", height : '100vh' }}>
+            <div class="ui medium text loader">Searching</div>
+          </div>
+        <p></p>
+        <p></p>
+      </div>
+    )
+  }
 
   if (!register.username){
     return (

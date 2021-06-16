@@ -14,13 +14,20 @@ handler.post(async(req, res) =>{
 
     try {
         const login = await Register.findOne({email : email});
-        !login && res.status(404).json("User not found");
-
-        const validPassword = await bcrypt.compare(password, login.password);
-        !validPassword && res.status(400).json("Wrong Password");
-       
-        res.status(200).json(login)
-        console.log("Successfully logged in")
+        if(!login){
+            res.status(404).json("User not found");
+        }
+        if(login){
+            const validPassword = await bcrypt.compare(password, login.password);
+            if(!validPassword){
+                res.status(400).json("Wrong Password");
+            }else{
+                res.status(200).json(login)
+                console.log("Successfully logged in")
+            }
+            
+        }
+        
     } catch(err) {
         res.status(500).json(err)
         console.log("credentials Invalid")
