@@ -15,6 +15,7 @@ import styles from "../../../../assets/jss/nextjs-material-dashboard/views/dashb
 import Global from '../components/global'
 import Recently from '../components/recently'
 import Sbody from "../../../../search/bodysearch"
+import Oops from "../../../../search/openModal"
 
 
 
@@ -144,20 +145,10 @@ if(loading){
 }
 
 
-if (!session && !loading){
+if (!session && !loading || session.user.email != props.email  || logins.section != "individual user" ){
   return (
       <main>
-          <div>
-              <h1>
-                  You arent signed in please sign in
-              </h1>
-              <Button variant="contained" color="primary" onClick ={() => router.push('/')} style={{marginRight : 20}}>
-                 Go Home
-              </Button>
-              <Button variant="contained" color="secondary"  onClick ={() => router.push('/logins/login')}>
-                 Login
-              </Button>
-          </div>
+          <Oops />
       </main>
   )
 }
@@ -167,6 +158,7 @@ const onLogout = async () =>{
   router.push('/');
 
 }
+
 
 const goHome = async() =>{
   setContent(true);
@@ -218,7 +210,7 @@ const goHome = async() =>{
           </>
         )}  
 
-{       bsearch && (
+        {bsearch && (
           <>
             <Sbody svg="/search.svg" />
           </>

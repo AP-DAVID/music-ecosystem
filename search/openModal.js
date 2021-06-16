@@ -1,25 +1,24 @@
-const Openmodal = () => {
+import { Result, Button } from 'antd';
+import {useRouter, withRouter} from 'next/router'
+const Oops = () => {
+    const router = useRouter()
+
+    const pushh = () =>{
+        router.push('/')
+    }
+
     return ( 
-    <div class="ui basic modal">
-        <div class="ui icon header">
-            <i class="archive icon"></i>
-            Logout
-        </div>
-        <div class="content">
-            <p>Would you like to logout?</p>
-        </div>
-        <div class="actions">
-            <div class="ui red basic cancel inverted button">
-            <i class="remove icon"></i>
-            No
-            </div>
-            <div class="ui green ok inverted button">
-            <i class="checkmark icon"></i>
-            Yes
+        <div className="container" style={{display:"flex", flexDirection : "column", justifyContent : "center"}}>
+            <div style={{display:"flex", flexDirection : "column", justifyContent : "center"}}>
+                <Result
+                    status="403"
+                    title="403"
+                    subTitle="Sorry, you are not authorized to access this page."
+                    extra={<Button onClick={pushh} type="primary">Back Home</Button>}
+                />
             </div>
         </div>
-     </div>
-     )
+     );
 }
  
-export default Openmodal;
+export default Oops;

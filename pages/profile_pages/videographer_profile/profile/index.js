@@ -16,6 +16,7 @@ import Button from '@material-ui/core/Button';
 import {getLogin} from '../../../../fetchdata/loginFetcher'
 import {getUser} from '../../../../fetchdata/registerFetcher'
 import Sbody from "../../../../search/bodysearch"
+import Oops from "../../../../search/openModal"
 
 export default function Videographer(props) {
   const router = useRouter()
@@ -137,20 +138,10 @@ const onSearch = async(value) =>{
   }
 
 
-  if (!session && !loading){
+  if (!session && !loading || session.user.email != props.email || logins.section != "videographer"){
     return (
         <main>
-            <div>
-                <h1>
-                    You arent signed in please sign in
-                </h1>
-                <Button variant="contained" color="primary" onClick ={() => router.push('/')} style={{marginRight : 20}}>
-                   Go Home
-                </Button>
-                <Button variant="contained" color="secondary"  onClick ={() => router.push('/logins/login')}>
-                   Login
-                </Button>
-            </div>
+            <Oops />
         </main>
     )
   }

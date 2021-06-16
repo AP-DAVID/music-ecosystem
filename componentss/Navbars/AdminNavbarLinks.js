@@ -17,7 +17,9 @@ import Poppers from "@material-ui/core/Popper";
 import Divider from "@material-ui/core/Divider";
 // @material-ui/icons
 import Person from "@material-ui/icons/Person";
+import {useRouter} from 'next/router'
 import Notifications from "@material-ui/icons/Notifications";
+import {signOut, useSession } from "next-auth/client";
 import Dashboard from "@material-ui/icons/Dashboard";
 const { Search } = Input;
 // core components
@@ -28,6 +30,7 @@ import useWindowSize from "../Hooks/useWindowSize.js";
 import styles from "../../assets/jss/nextjs-material-dashboard/components/headerLinksStyle.js";
 
 export default function AdminNavbarLinks({onSearch, onLogout}) {
+  const router = useRouter()
   const size = useWindowSize();
   const useStyles = makeStyles(styles);
   const classes = useStyles();
@@ -53,6 +56,10 @@ export default function AdminNavbarLinks({onSearch, onLogout}) {
   const handleCloseProfile = () => {
     setOpenProfile(null);
   };
+  const handleLogOut = async () =>{
+    await signOut()
+    router.push('/');
+  }
 
   
 
@@ -201,8 +208,16 @@ export default function AdminNavbarLinks({onSearch, onLogout}) {
                       Settings
                     </MenuItem>
                     <Divider light />
+
                     <MenuItem
                       onClick={handleCloseProfile}
+                      className={classes.dropdownItem}
+                    >
+                      Edit profile
+                    </MenuItem>
+                    <Divider light />
+                    <MenuItem
+                      onClick={handleLogOut}
                       className={classes.dropdownItem}
                     >
                      <button onClick={onLogout}>Logout</button> 
