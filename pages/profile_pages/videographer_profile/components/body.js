@@ -1,4 +1,4 @@
-const Body = ({userName, userEmail}) => {
+const Body = ({userName, userEmail, followers, following, description}) => {
     return ( 
         <>
              <main className="profile-page">
@@ -80,7 +80,7 @@ const Body = ({userName, userEmail}) => {
                     <div className="flex justify-center py-4 lg:pt-4 pt-8">
                       <div className="mr-4 p-3 text-center">
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                          26
+                          {followers}
                         </span>
                         <span className="text-sm text-blueGray-400">
                           Followers
@@ -88,7 +88,7 @@ const Body = ({userName, userEmail}) => {
                       </div>
                       <div className="mr-4 p-3 text-center">
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                          16
+                          {following}
                         </span>
                         <span className="text-sm text-blueGray-400">
                           Following
@@ -126,8 +126,7 @@ const Body = ({userName, userEmail}) => {
                   <div className="flex flex-wrap justify-center">
                     <div className="w-full lg:w-9/12 px-4">
                       <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                       A videographng compny giveing you the best experience out there
-                       in making your videos very good and worth your while.
+                       {description}
                       </p>
                       <a
                         href="#pablo"

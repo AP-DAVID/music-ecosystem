@@ -48,7 +48,6 @@ const handleSubmit = async(e) =>{
         router.push('/logins/login')
       }
       if(session){
-       await signOut()
         router.push('/logins/login')
       }
 

@@ -40,7 +40,7 @@ export default function Recordlabel(props) {
  //search for user
 const onSearch = async(value) =>{
   console.log(value);
-
+  let res = value.toLowerCase();
 
   const config = {
     headers: {
@@ -51,7 +51,7 @@ const onSearch = async(value) =>{
 
   if(value != '' && value != logins.username){
     try{
-      setForm(form.username = value)
+      setForm(form.username = res)
       const response = await axios.post('/api/search', JSON.stringify(form) , config)
       setForm({
         ...form,
@@ -163,7 +163,13 @@ const onSearch = async(value) =>{
        {content && (
         <>
           <Navbar transparent />
-            <Body userName={logins.username} userEmail={logins.email}/>
+            <Body 
+               userName={logins.username} 
+               userEmail={logins.email} 
+               description={logins.description} 
+               followers={logins.followers.length}
+               following={logins.following.length}   
+            />
           <Footer />
 
         </>

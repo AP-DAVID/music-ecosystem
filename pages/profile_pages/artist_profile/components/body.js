@@ -1,4 +1,4 @@
-const Body = ({userName, userEmail}) => {
+const Body = ({userName, userEmail, description, followers, following}) => {
     return ( 
         <>
             <main className="profile-page">
@@ -63,26 +63,26 @@ const Body = ({userName, userEmail}) => {
                     <div className="flex justify-center py-4 lg:pt-4 pt-8">
                       <div className="mr-4 p-3 text-center">
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                          22
+                         {followers}
                         </span>
                         <span className="text-sm text-blueGray-400">
-                          Friends
+                         followers
                         </span>
                       </div>
                       <div className="mr-4 p-3 text-center">
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                          10
+                          {following}
                         </span>
                         <span className="text-sm text-blueGray-400">
-                          likes
+                          following
                         </span>
                       </div>
                       <div className="lg:mr-4 p-3 text-center">
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                          89
+                         2
                         </span>
                         <span className="text-sm text-blueGray-400">
-                          Comments
+                          likes
                         </span>
                       </div>
                     </div>
@@ -109,11 +109,7 @@ const Body = ({userName, userEmail}) => {
                   <div className="flex flex-wrap justify-center">
                     <div className="w-full lg:w-9/12 px-4">
                       <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                      A developer trying to get this bread, and and some of you 
-                      might be wondering, yep I did not entirely create this page,
-                      I am too lazy for that so I used a template with some of my 
-                      input... but bitch if you think it is easy to reuse a code 
-                      and install the necessary confusing plugins .. then fuck you.
+                      {description}
                       </p>
                       <a
                         href="#pablo"

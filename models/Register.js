@@ -6,7 +6,9 @@ const RegisterSchema = new mongoose.Schema({
        required : [true, 'Please add a name'],
        min : 3,
        max : 20,
-       unique : true
+       unique : true,
+       trim: true,
+       lowercase: true 
    },
    section : {
        type : String,
@@ -16,7 +18,8 @@ const RegisterSchema = new mongoose.Schema({
        type : String,
        required : true,
        max : 50,
-       unique : true
+       unique : true,
+       trim: true
 
    },
    password:{

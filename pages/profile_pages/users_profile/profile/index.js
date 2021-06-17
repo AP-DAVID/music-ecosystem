@@ -59,6 +59,7 @@ const Dashboard = (props) => {
   
 const onSearch = async(value) =>{
   console.log(value);
+  let res = value.toLowerCase();
   
 
   const config = {
@@ -70,7 +71,7 @@ const onSearch = async(value) =>{
 
   if(value != '' && value != logins.username){
     try{
-      setForm(form.username = value)
+      setForm(form.username = res)
       const response = await axios.post('/api/search', JSON.stringify(form) , config)
       setForm({
         ...form,

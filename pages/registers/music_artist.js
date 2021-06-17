@@ -8,6 +8,7 @@ import {signIn, signOut, useSession} from "next-auth/client";
 import Auth from "../../layouts/Auth.js";
 
 export default function Register() {
+  const[session, loading] = useSession();
   const router = useRouter()
   const [form, setForm] = useState(
     {
@@ -19,6 +20,7 @@ export default function Register() {
 )
 
   const handleChange =(e) => {
+
       setForm({
           ...form,
           [e.target.name] : e.target.value
@@ -26,6 +28,10 @@ export default function Register() {
   }
 
   const handleSubmit = async(e) =>{
+    if(session){
+      await signOut
+    }
+    
     setForm(form.section = "music artist")
     const config = {
       headers: {
