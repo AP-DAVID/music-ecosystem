@@ -9,6 +9,7 @@ import Auth from "../../layouts/Auth.js";
 
 export default function Register() {
   const[session, loading] = useSession();
+  const [validation, setValidation] = useState('')
   const router = useRouter()
   const [form, setForm] = useState(
     {
@@ -41,7 +42,15 @@ export default function Register() {
 
       try{
         const response = await axios.post('/api/register', JSON.stringify(form) , config)
-        router.push(`/details/${response.data._id}`)
+        if(response.data === "User found"){
+          setValidation("User already Exists")
+        }
+        if(response.data === "email exist"){
+          setValidation("Email already exists")
+        }
+        if(response.data._id){
+          router.push(`/details/${response.data._id}`)
+        }
       }catch(error){
           console.log(error)
       }
@@ -83,6 +92,9 @@ export default function Register() {
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                 <div className="text-blueGray-400 text-center mb-3 font-bold">
                   <small>Or sign up with credentials</small>
+                </div>
+                <div className="text-red-500 text-center mb-3 font-bold">
+                  <medium>{validation}</medium>
                 </div>
                 <form>
                   <div className="relative w-full mb-3">

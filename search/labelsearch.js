@@ -13,7 +13,8 @@ export default function Label({id, logins}) {
   const {register, isLoading, isError} = getUser(id)
   const [form, setForm] = useState(
     {
-    username: '',
+    senderId: logins?._id,
+    receiverId : '',
   }
  )
 
@@ -70,11 +71,38 @@ export default function Label({id, logins}) {
   }
   
 
+  const onChat = async () =>{
+
+    
+    setForm(form.receiverId = register._id);
+
+    const config = {
+      headers: {
+          "Accept" : "application/json",
+          'Content-type' : "application/json"
+      }
+    }
+
+      try{
+        const response = await axios.post('/api/conversations', JSON.stringify(form) , config)
+        console.log(response)
+        router.push({
+          pathname: '/messenger/chats',
+          query: {email: logins?.email}
+      })
+      }catch(error){
+          console.log(error)
+      }
+      
+  }
+
+
+
   return (
     <>
       
       <Navbar transparent />
-        <Body2 register={register} onfollow={onfollow}/>
+        <Body2 register={register} onChat={onChat}  onfollow={onfollow}/>
       <Footer />
     </>
   );

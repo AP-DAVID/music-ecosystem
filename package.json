@@ -13,10 +13,15 @@
     "@material-ui/icons": "^4.11.2",
     "@popperjs/core": "^2.9.2",
     "@svgr/webpack": "^5.5.0",
+    "alert-sound-notify": "^0.0.8",
     "antd": "^4.16.0",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
+    "beeper": "^3.0.0",
     "classnames": "^2.2.6",
+    "faker": "^5.5.3",
+    "jquery": "^3.6.0",
+    "loadash": "^1.0.0",
     "mongoose": "^5.12.11",
     "netlify-identity-widget": "^1.9.1",
     "next": "10.2.0",
@@ -32,8 +37,11 @@
     "react-router-dom": "^5.2.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
+    "socket.io": "^4.1.2",
+    "socket.io-client": "^4.1.2",
     "styled-components": "^5.3.0",
-    "swr": "^0.5.6"
+    "swr": "^0.5.6",
+    "timeago.js": "^4.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.5",

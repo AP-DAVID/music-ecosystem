@@ -20,7 +20,7 @@ import logo from "../assets/img/reactlogo.png";
 
 let ps;
 
-export default function Admin({goHome, onLogout, userPicture, onSearch, userName, userEmail, children, ...rest}) {
+export default function Admin({goChat, goHome, onLogout, userPicture, onSearch, userName, userEmail, children, ...rest}) {
   // used for checking current route
   const router = useRouter();
   // styles
@@ -31,6 +31,7 @@ export default function Admin({goHome, onLogout, userPicture, onSearch, userName
   // states and functions
   const [image, setImage] = React.useState(bgImage);
   const [color, setColor] = React.useState("white");
+  const [sidebars, setSidebars] = React.useState(true);
   const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleImageClick = (image) => {
@@ -77,6 +78,8 @@ export default function Admin({goHome, onLogout, userPicture, onSearch, userName
   }, [mainPanel]);
   return (
     <div className={classes.wrapper}>
+
+      
       <Sidebar
         userPicture = {userPicture}
         routes={routes}
@@ -90,6 +93,7 @@ export default function Admin({goHome, onLogout, userPicture, onSearch, userName
       />
       <div className={classes.mainPanel} ref={mainPanel}>
         <Navbar
+          goChat = {goChat}
           goHome = {goHome}
           onLogout = {onLogout}
           onSearch = {onSearch}

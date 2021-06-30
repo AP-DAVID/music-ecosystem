@@ -13,7 +13,7 @@ handler.get(async(req, res)=>{
     }= req
     
     try {
-        const registerr = await Register.findById(req.query.id)
+        const registerr = await Register.findById(id)
         if(!registerr){
             const {password, updateAt, ...other} = regist._doc
             res.json({success: false, message:"No such user"})

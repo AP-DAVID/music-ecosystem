@@ -25,6 +25,7 @@ const Dashboard = (props) => {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
   const[session, loading] = useSession();
+  const[load, setLoad] = useState(false);
   const {logins, isLoading, isError} = getLogin(props.email) 
   const [responsee, setResponse] = useState()
   const[content, setContent] = useState(true);
@@ -43,6 +44,7 @@ const Dashboard = (props) => {
   }
  )
 
+ 
 
  if(isError){return (<p>An error Occured</p>)}
   if(isLoading){
@@ -58,6 +60,7 @@ const Dashboard = (props) => {
   
   
 const onSearch = async(value) =>{
+  setLoad(true);
   console.log(value);
   let res = value.toLowerCase();
   
@@ -69,7 +72,8 @@ const onSearch = async(value) =>{
     }
   }
 
-  if(value != '' && value != logins.username){
+  if(value != '' && res != logins.username){
+    
     try{
       setForm(form.username = res)
       const response = await axios.post('/api/search', JSON.stringify(form) , config)
@@ -81,13 +85,14 @@ const onSearch = async(value) =>{
       await setResponse(response);
       setContent(false);
       if(response.data.status === 404){
+        setLoad(false)
         setSearch(true)
       }
      
 
 
       if (response.data.section === "individual user") {
-
+        setLoad(false)
         setIU(true)
         setMusicart(false)
         setLabel(false)
@@ -96,6 +101,7 @@ const onSearch = async(value) =>{
       
       };
       if (response.data.section === "music artist") {
+        setLoad(false)
         setMusicart(true)
         setIU(false)
         setLabel(false)
@@ -103,6 +109,7 @@ const onSearch = async(value) =>{
         setSearch(false)
       };
       if (response.data.section === "record label") {
+        setLoad(false)
         setLabel(true)
         setMusicart(false)
         setIU(false)
@@ -110,6 +117,7 @@ const onSearch = async(value) =>{
         setSearch(false)
       };
       if (response.data.section === "videographer") {
+        setLoad(false)
         setVideogr(true)
         setLabel(false)
         setMusicart(false)
@@ -125,6 +133,7 @@ const onSearch = async(value) =>{
   }
   else{
     console.log("what are you even doing")
+    setLoad(false)
   }
 } 
 
@@ -171,11 +180,18 @@ const goHome = async() =>{
   
 }
 
+const goChat = async() =>{
+  router.push({
+    pathname: '/messenger/chats',
+    query: {email: session.user.email}
+})
+}
+
 
 
 
       return (
-        <Admin goHome={goHome} onLogout={onLogout}  userName={logins.username} userPicture={session.user.image} onSearch={onSearch}>
+        <Admin goChat={goChat} goHome={goHome} onLogout={onLogout}  userName={logins.username} userPicture={session.user.image} onSearch={onSearch}>
           {content && (
             <>
               <Global text1="Nigeria Top ten" text2="See all"/>
@@ -216,6 +232,19 @@ const goHome = async() =>{
             <Sbody svg="/search.svg" />
           </>
         )}  
+
+        {load && (
+          <>
+              <div class="ui segment" style={{display: "flex", flexDirection : "column", justifyContent : "center", height : '100vh' }}>
+                <div class="ui active inverted dimmer"style={{display: "flex", flexDirection : "row", justifyContent : "center", height : '100vh' }}>
+                  <div class="ui medium text loader">Loading</div>
+                 </div>
+              <p></p>
+              <p></p>
+          </div>
+
+          </>
+        )}
 
        </Admin>
         

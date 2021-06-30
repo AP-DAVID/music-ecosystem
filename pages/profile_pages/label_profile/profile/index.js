@@ -154,11 +154,18 @@ const onSearch = async(value) =>{
   
     
   }
+
+  const goChat = async() =>{
+    router.push({
+      pathname: '/messenger/chats',
+      query: {email: session.user.email}
+  })
+  }
   
 
   
   return (
-    <Admin goHome={goHome} onLogout = {onLogout} userName={logins.username} onSearch={onSearch}>
+    <Admin goChat ={goChat} goHome={goHome} onLogout = {onLogout} userName={logins.username} onSearch={onSearch}>
       
        {content && (
         <>

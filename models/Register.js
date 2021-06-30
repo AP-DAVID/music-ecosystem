@@ -48,6 +48,22 @@ const RegisterSchema = new mongoose.Schema({
         type : Array,
         default : []
     },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+    city: {
+      type: String,
+      max: 50,
+    },
+    profilePicture: {
+      type: String,
+      default: "",
+    },
+    coverPicture: {
+      type: String,
+      default: "",
+    },
    isloggedin : {
        type : Boolean,
        default : false

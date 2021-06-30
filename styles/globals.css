@@ -10,3 +10,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Newsreader:wght@600&display=swap');
 
 
+.message.own{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    
+}
+
+.message.own .messageText{
+    background-color: rgb(245, 241, 241);
+    color : black;
+    max-width: 250px;
+}
+
+
+.messageText {
+    padding : 10px;
+    border-radius: 20px;
+    background-color: #00838F;
+    color : white;
+    max-width: 250px;
+    overflow-wrap: break-word;
+}

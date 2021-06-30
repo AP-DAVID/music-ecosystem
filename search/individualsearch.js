@@ -12,7 +12,8 @@ export default function Individual({id, logins}) {
   const {register, isLoading, isError} = getUser(id)
   const [form, setForm] = useState(
     {
-    username: '',
+    senderId: logins?._id,
+    receiverId : '',
   }
  )
 
@@ -68,6 +69,33 @@ export default function Individual({id, logins}) {
         </main>
     )
   }
+
+  const onChat = async () =>{
+
+    
+    setForm(form.receiverId = register._id);
+
+    const config = {
+      headers: {
+          "Accept" : "application/json",
+          'Content-type' : "application/json"
+      }
+    }
+
+      try{
+        const response = await axios.post('/api/conversations', JSON.stringify(form) , config)
+        console.log(response)
+        router.push({
+          pathname: '/messenger/chats',
+          query: {email: logins?.email}
+      })
+      }catch(error){
+          console.log(error)
+      }
+      
+  }
+
+
   
 
   
@@ -76,7 +104,7 @@ export default function Individual({id, logins}) {
     <>
       
       <Navbar transparent />
-        <Body register={register} onfollow={onfollow}/>
+        <Body register={register} onChat={onChat}  onfollow={onfollow}/>
       <Footer />
     </>
   );

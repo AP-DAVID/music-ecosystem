@@ -12,7 +12,8 @@ export default function Videography({id, logins}) {
   const {register, isLoading, isError} = getUser(id)
   const [form, setForm] = useState(
     {
-    username: '',
+    senderId: logins?._id,
+    receiverId : '',
   }
  )
 
@@ -69,6 +70,30 @@ const onfollow = async () =>{
     )
   }
   
+  const onChat = async () =>{
+
+    
+    setForm(form.receiverId = register._id);
+
+    const config = {
+      headers: {
+          "Accept" : "application/json",
+          'Content-type' : "application/json"
+      }
+    }
+
+      try{
+        const response = await axios.post('/api/conversations', JSON.stringify(form) , config)
+        console.log(response)
+        router.push({
+          pathname: '/messenger/chats',
+          query: {email: logins?.email}
+      })
+      }catch(error){
+          console.log(error)
+      }
+      
+  }
 
 
 
@@ -76,7 +101,7 @@ const onfollow = async () =>{
     <>
       
       <Navbar transparent />
-        <Body4 register={register} onfollow={onfollow}/>
+        <Body4 register={register} onChat={onChat} onfollow={onfollow}/>
       <Footer />
     </>
   );

@@ -12,6 +12,7 @@ import {signIn, signOut, useSession} from "next-auth/client";
 import Auth from "../../layouts/Auth.js";
 
 export default function Login() {
+  const [validation, setValidation] = useState("") 
   const [session, loading] = useSession();
   const router = useRouter()
   const [responsee, setResponse] = useState()
@@ -39,8 +40,7 @@ export default function Login() {
 
 const handleSubmit = async(e) =>{
   
-      
-  signIn("email-login", {email: form.email, password : form.password})
+      signIn("email-login", {email: form.email, password : form.password})
     
     
 }
@@ -149,6 +149,9 @@ useEffect(() =>{
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                 <div className="text-blueGray-400 text-center mb-3 font-bold">
                   <small>Or sign in with credentials</small>
+                </div>
+                <div className="text-red-600 text-center mb-3 font-bold">
+                  <small>{validation}</small>
                 </div>
                 <form>
                   <div className="relative w-full mb-3">

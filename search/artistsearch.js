@@ -12,15 +12,21 @@ export default function Artist({id, logins}) {
   const router = useRouter()
   const {register, isLoading, isError} = getUser(id)
   const [text, setText] = useState("follow")
-  const [form2, setForm2] = useState(
+  const [form, setForm] = useState(
+    {
+    senderId: logins?._id,
+    receiverId : '',
+  }
+ )
+
+ const [form2, setForm2] = useState(
   {
    userId : logins._id,
   }
 )
-const check = () =>{
-  console.log(logins._id)
-  console.log(id)
-}
+
+
+
 
  const onfollow = async () =>{
   const config = {
@@ -67,6 +73,31 @@ const check = () =>{
     )
   }
   
+  const onChat = async () =>{
+
+    
+    setForm(form.receiverId = register._id);
+
+    const config = {
+      headers: {
+          "Accept" : "application/json",
+          'Content-type' : "application/json"
+      }
+    }
+
+      try{
+        const response = await axios.post('/api/conversations', JSON.stringify(form) , config);
+        console.log(response);
+        router.push({
+          pathname: '/messenger/chats',
+          query: {email: logins?.email}
+      })
+      }catch(error){
+          console.log(error)
+      }
+      
+  }
+
 
  
 
@@ -74,7 +105,7 @@ const check = () =>{
     <>
       
       <Navbar transparent />
-        <Body3 register={register} text={text}  onfollow={onfollow}/>
+        <Body3 register={register} onChat={onChat}  text={text}  onfollow={onfollow}/>
       <Footer />
     </>
   );

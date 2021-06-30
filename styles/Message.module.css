@@ -1,0 +1,24 @@
+.message{
+    display : flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.messageTop {
+    display : flex;
+    flex-direction: column;
+}
+
+.messageImg{
+    width : 32px;
+    height : 32px;
+    border-radius : 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.messageBottom{
+    font-size: 12px;
+    margin-top: 10px;
+}
+
