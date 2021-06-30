@@ -1,9 +1,34 @@
-const io = require("socket.io")(8900, {
+var cors = require('cors');
+const http = require('http');
+const path = require('path');
+const express = require('express');
+const router = require('./router');
+
+
+
+const app = express();
+const server = http.createServer(app);
+
+
+app.use(cors())
+app.use(router)
+
+
+
+
+const io = require("socket.io")(server, {
     cors: {
-      origin: "https://muscotest5a.vercel.app",
+      origin: "http://localhost:3000",
+      methods: ["GET", "POST"],
+      allowedHeaders: ["my-custom-header"],
+      credentials: true
     },
   });
   
+
+  const PORT = process.env.PORT || 5000;
+
+
   let users = [];
   
   const addUser = (userId, socketId) => {
@@ -45,3 +70,7 @@ const io = require("socket.io")(8900, {
       io.emit("getUsers", users);
     });
   });
+
+  server.listen(PORT, () => {
+    console.log(`Server is runing on port ${PORT}`);
+});
