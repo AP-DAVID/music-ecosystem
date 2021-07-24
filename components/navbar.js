@@ -13,6 +13,7 @@ import {
   import React, { useState, useEffect } from "react";
   import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
   import {Link as nextLink} from 'next/link'
+  import { motion } from 'framer-motion'
 
 
   
@@ -122,10 +123,18 @@ import {
   
     const displayDesktop = () => {
       return (
-        <Toolbar className={toolbar}>
+        <motion.Toolbar
+           className={toolbar}
+           initial ={{y : -150}}
+            animate = {{y : 20}}
+            transition={{delay : 0.2, type:'spring', stiffness : 120}}
+        
+        >
+          
             <h1 style={{fontFamily : 'Lora'}}>Musco</h1>
-          <div>{getMenuButtons()}</div>
-        </Toolbar>
+            <div>{getMenuButtons()}</div>
+            
+        </motion.Toolbar>
       );
     };
   
@@ -198,27 +207,33 @@ import {
     const getMenuButtons = () => {
       return headersData.map(({ label, href, onclick}) => {
         return (
-          <>
-          <Button
-            {...{
-              key: label,
-              color: "inherit",
-              href: href,
-              component : nextLink,
-              className: menuButton,
-            }}
-            onClick ={onclick}
+          <motion
+            whileHover={{ scale : 1.3, originX : 0, color : '#fe8112'}}
           >
-            {label}
-          </Button>
-          </>
+            <Button
+              {...{
+                key: label,
+                href: href,
+                component : nextLink,
+                className: menuButton,
+              }}
+              onClick ={onclick}
+              
+            >
+              {label}
+            </Button>
+          </motion>
         );
       });
     };
   
     return (
   
-      <header>
+      <motion.header
+        // initial={{y: -500}}
+        // animate = {{ y : 0}}
+      >
+           
             <ThemeProvider theme={customTheme}>
                 <AppBar color={"secondary"}  >
                 {mobileView ? displayMobile() : displayDesktop()}
@@ -226,7 +241,7 @@ import {
                 </AppBar>
 
         </ThemeProvider>
-      </header>
+      </motion.header>
   
   )
     

@@ -43,6 +43,11 @@ export default function Register() {
       try{
         const response = await axios.post('/api/register', JSON.stringify(form) , config)
         
+        // setForm(form.username = "");
+        // setForm(form.section = "");
+        // setForm(form.password = "");
+        // setForm(form.email = "");
+        
         if(response.data === "User found"){
           setValidation("User already Exists")
         }

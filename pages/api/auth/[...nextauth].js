@@ -20,7 +20,7 @@ const options ={
                             'Content-type' : "application/json"
                         }
                     }
-                    const baseUrl = "https://muscotest5a.vercel.app";
+                    const baseUrl = "http://localhost:3000";
                     const response = await axios.post(baseUrl + '/api/login', credentials, config)
                     
                     return response.data
@@ -32,12 +32,13 @@ const options ={
 
         }),
         Providers.GitHub({
-
+            id: "github", 
             clientId: process.env.GITHUB_ID,
             clientSecret : process.env.GITHUB_SECRET
 
         }),
         Providers.Auth0({
+            id: "auth0", 
             clientId : process.env.AUTH0_CLIENT_ID,
             clientSecret : process.env.AUTH0_CLIENT_SECRET,
             domain : process.env.AUTH0_DOMAIN,
