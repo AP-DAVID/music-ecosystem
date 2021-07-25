@@ -15,12 +15,12 @@ handler.post(async(req, res) =>{
     try {
         const login = await Register.findOne({email : email});
         if(!login){
-            res.status(200).json("User not found");
+            res.status(400).json("User not found");
         }
         if(login){
             const validPassword = await bcrypt.compare(password, login.password);
             if(!validPassword){
-                res.status(200).json("Wrong Password");
+                res.status(400).json("Wrong Password");
             }else{
                 res.status(200).json(login)
                 console.log("Successfully logged in")

@@ -3,13 +3,18 @@ import '../styles/globals.css'
 import 'antd/dist/antd.css';
 import 'semantic-ui-css/semantic.min.css'
 import {Provider} from "next-auth/client"
+import { AnimatePresence, motion } from 'framer-motion'
 
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, router }) {
 
   return(
     <Provider session={pageProps.session} >
-        <Component {...pageProps} />
+      <AnimatePresence exitBeforeEnter initial={false}>
+
+        <Component {...pageProps} key={router.route} />
+        
+      </AnimatePresence>
     </Provider>
   );
 }

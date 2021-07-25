@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router'
 
 import {signIn, signOut, useSession} from "next-auth/client";
+import {motion} from 'framer-motion';
 // layout for page
 
 import Auth from "../../layouts/Auth.js";
@@ -35,12 +36,53 @@ export default function Login() {
       ...form,
       [e.target.name] : e.target.value
   })
+
+  // if( form.email !== '' && form.password !== ''){
+  //   setAbled(false)
+  // }else{
+  //   setAbled(true)
+  // }
 }
 
 
+
 const handleSubmit = async(e) =>{
+      const config = {
+        headers: {
+            "Accept" : "application/json",
+            'Content-type' : "application/json"
+        }
+      }
+      
+      if( form.email !== '' && form.password !== ''){
+
+        try{
+          
+          const response = await axios.post('/api/login', JSON.stringify(form) , config)
+          if(response.data === "User not found"){
+            setValidation("Omo e be like if your user no exist");
+          }
+          else if(response.data === "Wrong Password"){
+            setValidation("Omo wrong password oO");
+          }
+          else{
+              signIn("email-login", {email: form.email, password : form.password})
+          }
+          
+
+          
+
+          
+
+        }catch(error){
+          console.log(error);
+        }
+     
+      }else{
+        setValidation("Please enter the required inputs")
+      }
   
-      signIn("email-login", {email: form.email, password : form.password})
+      
       
     
 }
@@ -109,6 +151,22 @@ useEffect(() =>{
 },[session])
 
 
+const containerVariants ={
+  hidden :{
+     opacity : 0,
+  },
+
+  visible : {
+      opacity : 1,
+      transition : {delay : 0.5, duration : 1}
+  },
+  exit : {
+    x : '-100vw',
+    transition : {ease : 'easeInOut', duration : 0.5}
+
+  }
+}
+
 
 
 
@@ -119,7 +177,13 @@ useEffect(() =>{
     <div>
     {!session && (
       <Auth>
-      <div className="container mx-auto px-4 h-full">
+      <motion.div 
+       className="container mx-auto px-4 h-full"
+       variants = {containerVariants}
+        initial = "hidden"
+        animate="visible"
+        exit="exit"
+      >
         <div className="flex content-center items-center justify-center h-full">
         
           <div className="w-full lg:w-4/12 px-4">
@@ -207,13 +271,18 @@ useEffect(() =>{
                   </div>
 
                   <div className="text-center mt-6">
-                    <button
+                    <motion.button
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="button"
                       onClick={handleSubmit}
+                      whileHover={{
+                        scale : 1.0,
+                        textShadow : "0px 0px 8px rgb(255,255,255)",
+                        
+                      }}
                     >
                       Sign In
-                    </button>
+                    </motion.button>
                     {/* <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
@@ -252,7 +321,7 @@ useEffect(() =>{
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
      </Auth>
     )}
 
