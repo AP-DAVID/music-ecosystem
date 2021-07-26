@@ -18,6 +18,8 @@ const Body = ({svg}) => {
             transition : {ease : 'easeInOut'}
         }
     }
+
+    
     return (
         <motion.div
             className="container" 

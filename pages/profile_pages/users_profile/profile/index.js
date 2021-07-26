@@ -16,6 +16,7 @@ import Global from '../components/global'
 import Recently from '../components/recently'
 import Sbody from "../../../../search/bodysearch"
 import Oops from "../../../../search/openModal"
+import {motion} from 'framer-motion'
 
 
 

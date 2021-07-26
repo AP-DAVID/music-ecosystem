@@ -31,7 +31,7 @@ export default function Home() {
     >
       
       <Head>
-        <title>Create Next App</title>
+        <title>Musco App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
           

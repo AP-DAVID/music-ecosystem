@@ -1,4 +1,47 @@
+import {motion} from 'framer-motion'
+
 const Body = ({userName, userEmail, description, followers, following}) => {
+
+
+  const containerVariants ={
+    hidden :{
+        x : '-100vw',
+    },
+
+    visible : {
+        x : 0,
+        transition : {duration : 1.5, delay : 0.2, type : "spring", stiffness : 120}
+    },
+    exit : {
+        x : '-100vw',
+        transition : {ease : 'easeInOut'}
+    }
+}
+
+const Variants ={
+  hidden :{
+     opacity : 0,
+  },
+
+  visible : {
+      opacity : 1,
+      transition : {delay : 0.5, duration : 2}
+  },
+  exit : {
+    x : '-100vw',
+    transition : {ease : 'easeInOut', duration : 0.5}
+
+  }
+}
+
+
+
+
+
+
+
+
+
     return ( 
         <>
             <main className="profile-page">
@@ -37,12 +80,22 @@ const Body = ({userName, userEmail, description, followers, following}) => {
         </section>
         <section className="relative py-16 bg-blueGray-200">
           <div className="container mx-auto px-4">
-            <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+            <motion.div 
+               className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
+               variants = {Variants}
+               initial = "hidden"
+               animate="visible"
+               exit="exit"
+            >
               <div className="px-6">
                 <div className="flex flex-wrap justify-center">
                   <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                     <div className="relative">
-                      <img
+                      <motion.img
+                        variants = {containerVariants}
+                        initial = "hidden"
+                        animate="visible"
+                        exit="exit"
                         alt="..."
                         src="/img/yeah.jpeg"
                         className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
@@ -122,7 +175,7 @@ const Body = ({userName, userEmail, description, followers, following}) => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
       </main>

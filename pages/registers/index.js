@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import {signIn,  signOut, useSession} from "next-auth/client";
 import {motion} from 'framer-motion';
 
+
 // layout for page
 
 import Auth from "../../layouts/Auth.js";

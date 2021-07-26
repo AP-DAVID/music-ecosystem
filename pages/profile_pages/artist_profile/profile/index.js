@@ -16,6 +16,7 @@ import {getLogin} from '../../../../fetchdata/loginFetcher'
 import {getUser} from '../../../../fetchdata/registerFetcher'
 import Sbody from "../../../../search/bodysearch"
 import Oops from "../../../../search/openModal"
+import {motion} from 'framer-motion'
 
 export default function Artistt(props) {
   const router = useRouter()

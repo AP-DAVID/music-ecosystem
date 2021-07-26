@@ -158,7 +158,7 @@ const containerVariants ={
 
   visible : {
       opacity : 1,
-      transition : {delay : 0.5, duration : 1}
+      transition : {delay : 5.0, duration : 2}
   },
   exit : {
     x : '-100vw',

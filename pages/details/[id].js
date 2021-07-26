@@ -5,6 +5,10 @@ import { useRouter } from 'next/router'
 import {signOut, useSession } from "next-auth/client";
 import axios from 'axios';
 import {getUser} from '../../fetchdata/registerFetcher'
+import {motion} from 'framer-motion'
+
+import { Form, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
+
 
 const Details = () => {
 
@@ -23,6 +27,22 @@ const Details = () => {
       
     }
   )
+
+  const containerVariants ={
+      hidden :{
+        opacity : 0,
+      },
+
+      visible : {
+          opacity : 1,
+          transition : {delay : 0.5, duration : 1}
+      },
+      exit : {
+        x : '-100vw',
+        transition : {ease : 'easeInOut', duration : 0.5}
+
+      }
+  }
  
 
   const handleChange =(e) => {
@@ -74,15 +94,41 @@ const handleSubmit = async(e) =>{
 
     )}
 
+
+    const prefixSelector = (
+      <Form.Item name="prefix" noStyle>
+        <Select
+          style={{
+            width: 70,
+          }}
+        >
+          <Option value="86">+234</Option>
+          <Option value="87">+87</Option>
+        </Select>
+      </Form.Item>
+    );
+
+    
+
+
+
     return (
       <div className="bg-cover bg-center ..." style={{height:"100vh", backgroundImage:`url(${bg5})` }}>
-         <div className="container mx-auto px-4 h-full">
+         <motion.div 
+          className="container mx-auto px-4 h-full"
+          variants = {containerVariants}
+          initial = "hidden"
+          animate="visible"
+          exit="exit"
+         >
           <div className="flex content-center items-center justify-center h-full">
         
           <div className="w-full lg:w-4/12 px-4">
            
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                <form>
+                <Form name="register"
+                      
+                >
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-xs font-bold mb-2"
@@ -111,9 +157,9 @@ const handleSubmit = async(e) =>{
                     >
                       enter your Phone number
                     </label>
-                    <input
+                    <Input
                       type="number"
-                      className="border-0 px-3 py-3 placeholder-black-300 text-black-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      addonBefore={prefixSelector}
                       placeholder="Phone number"
                       name ='phonenumber'
                       onChange={handleChange}
@@ -140,26 +186,30 @@ const handleSubmit = async(e) =>{
                   </div>
 
                   <div className="text-center mt-6">
-                    <button
+                    <motion.button
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="button"
                       onClick={handleSubmit}
-                      
+                      whileHover = {{
+                        scale : 1.0,
+                        textShadow : "0px 0px 8px rgb(255,255,255)",
+                      }}
+                      transition = {{type : "spring", stiffness : 300}}
                     >
                       Submit
-                    </button>
+                    </motion.button>
 
                   </div>
                  
       
                   
-                </form>
+                </Form>
                 </div>
                 
               </div>
             </div>
        
-            </div>
+            </motion.div>
           </div>
 
     );

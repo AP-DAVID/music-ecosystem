@@ -17,6 +17,7 @@ import styles from "../assets/jss/nextjs-material-dashboard/layouts/adminStyle.j
 
 import bgImage from "../assets/img/sidebar-2.jpg";
 import logo from "../assets/img/reactlogo.png";
+import {motion} from 'framer-motion';
 
 let ps;
 
@@ -34,6 +35,23 @@ export default function Admin({goChat, goHome, onLogout, userPicture, onSearch, 
   const [sidebars, setSidebars] = React.useState(true);
   const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const Variants ={
+    hidden :{
+       opacity : 0.5,
+    },
+  
+    visible : {
+        opacity : 1,
+        transition : {delay : 0.5, duration : 2}
+    },
+    exit : {
+      x : '-100vw',
+      transition : {ease : 'easeInOut', duration : 0.5}
+  
+    }
+  }
+
   const handleImageClick = (image) => {
     setImage(image);
   };
@@ -77,7 +95,13 @@ export default function Admin({goChat, goHome, onLogout, userPicture, onSearch, 
     };
   }, [mainPanel]);
   return (
-    <div className={classes.wrapper}>
+    <motion.div
+     className={classes.wrapper}
+     variants = {Variants}
+    initial = "hidden"
+    animate="visible"
+    exit="exit"
+    >
 
       
       <Sidebar
@@ -121,6 +145,6 @@ export default function Admin({goChat, goHome, onLogout, userPicture, onSearch, 
           fixedClasses={fixedClasses}
         /> */}
       </div>
-    </div>
+    </motion.div>
   );
 }
