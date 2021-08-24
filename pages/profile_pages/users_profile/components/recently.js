@@ -1,7 +1,7 @@
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Slickdiv from '../shared/Slickdiv'
-import {SONGS} from './data'
+import {SONGS} from '../../../../shared/data'
 
 const Recently = ({text1, text2}) => {
 
