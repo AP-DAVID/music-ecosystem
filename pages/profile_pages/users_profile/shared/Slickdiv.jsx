@@ -54,7 +54,7 @@ const Slickdiv = ({ images, slidesToShow = 3 }) => {
     ]
   };
 
-  const templateImages = images.map((image, idx) => {
+  const templateImages = images?.map((image, idx) => {
     if (image !== null) {
       return (
         <div
