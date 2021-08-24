@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '../shared/card'
 import Slickdiv from '../shared/Slickdiv'
-import {SONGS} from '../../../../shared/dummydata'
+import {SONGS} from './dummydata'
 
 const useStyles = makeStyles((theme) => ({
     root: {
