@@ -50,10 +50,10 @@ export default function Register() {
         setForm(form.email = '');
         
         if(response.data === "User found"){
-          setValidation("User already Exists")
+          setValidation("User Exists")
         }
         if(response.data === "email exist"){
-          setValidation("Email already exists")
+          setValidation("Emai exists")
         }
         if(response.data._id){
           router.push(`/details/${response.data._id}`)

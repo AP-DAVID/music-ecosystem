@@ -34,7 +34,7 @@ handler.post(async(req, res) =>{
         }
 
         if(!usernamefind && !emailfind){
-          const newRegister = await Register.create({ username: username , email: email, section : section,  password : hashedPassword});
+          const newRegister = await Register.create({ username: username, email: email, section : section, password : hashedPassword});
           newRegister.save()
           res.status(201).json(newRegister)
         }

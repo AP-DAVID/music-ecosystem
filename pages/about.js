@@ -34,8 +34,8 @@ export default function About() {
 				<h1 className="text-3xl md:text-5xl p-2 text-yellow-300 tracking-loose">About us</h1>
 				<h2 className="text-3xl md:text-5xl leading-relaxed text-gray-50 md:leading-snug mb-2">The Musco Team
 				</h2>
-				<p className="text-2x1 md:text-base text-gray-50 mb-4">This web application is divided into 4 sections and each section has it's own purpose
-                blah , blah , blah. figure it out yourself, and if you don't like it you can suck my clits and balls</p>
+				<p className="text-2x1 md:text-base text-gray-50 mb-4">Musco provides the user with an ecosystem of sections providing services and functionalities. It includes: Five sections(user, music artist, videographers, record labels) interacting an providing
+                 services to one another. An inbuilt chat application that makes the ecosystem even closer</p>
 				<motion.a 
                     href="/logins/login"
                     whileHover={{scale : 1.1}}

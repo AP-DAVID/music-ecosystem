@@ -1,10 +1,5 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import Navbar from '../components/navbar.js'
-import Body from '../components/body.js'
-import Attributes from '../components/attributes'
-import Footer from '../shared/footer.js'
-import {motion, AnimatePresence} from 'framer-motion'
+
+import {motion, AnimatePresence} from 'framer-motion';
 
 export default function Help() {
     const containerVariants ={
@@ -34,7 +29,7 @@ export default function Help() {
 				<h1 className="text-3xl md:text-5xl p-2 text-yellow-300 tracking-loose">Help</h1>
 				<h2 className="text-3xl md:text-5xl leading-relaxed text-gray-50 md:leading-snug mb-2">The Musco Team
 				</h2>
-				<p className="text-2x1 md:text-base text-gray-50 mb-4">The help form will be available as soon as I start giving two fucks about it. :)</p>
+				<p className="text-2x1 md:text-base text-gray-50 mb-4">The help form will be available. :)</p>
 				<motion.a 
                     href="/"
                     whileHover={{scale : 1.1}}
