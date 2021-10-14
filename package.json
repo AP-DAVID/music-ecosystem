@@ -17,6 +17,7 @@
     "@tailwindcss/line-clamp": "^0.2.2",
     "alert-sound-notify": "^0.0.8",
     "antd": "^4.16.0",
+    "aws-sdk": "^2.1008.0",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "beeper": "^3.0.0",
