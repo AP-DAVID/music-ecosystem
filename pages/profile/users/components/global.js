@@ -22,7 +22,7 @@ const Global = ({text1, text2}) => {
     const classes = useStyles();
 
     return ( 
-        <div>
+        <div className="mt-5">
           <Grid container style={{}} >
               <div style={{display : "flex", flexDirection : "column", borderRadius: 20,  border : '1px solid #9e9e9e', backgroundColor : '#9999', width : "150vh", height : 200, overflow : "hidden"}}>
                   <div style={{display : "flex", flexDirection : "row", justifyContent: "space-between"}}>

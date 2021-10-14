@@ -1,33 +1,32 @@
 import React, { useDebugValue } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {useState, useEffect} from 'react';
-import {signOut, useSession } from "next-auth/client";
-import Individual from "../../../../search/individualsearch"
-import Artist from "../../../../search/artistsearch"
-import Label from "../../../../search/labelsearch"
-import Videography from "../../../../search/videograph"
+import {signOut} from "next-auth/client";
+import Individual from "../../../search/individualsearch"
+import Artist from "../../../search/artistsearch"
+import { getSession } from "next-auth/client"
+import Label from "../../../search/labelsearch"
+import Videography from "../../../search/videograph"
 import Button from '@material-ui/core/Button';
 import {useRouter, withRouter} from 'next/router'
 import axios from 'axios';
-import Admin from "../../../../components/Admin.js";
-import {getLogin} from '../../../../fetchdata/loginFetcher'
-import styles from "../../../../assets/jss/nextjs-material-dashboard/views/dashboardStyle.js";
-import Global from '../components/global'
-import Recently from '../components/recently'
-import Sbody from "../../../../search/bodysearch"
-import Oops from "../../../../search/openModal"
+import Admin from "../../../components/Admin.js";
+import {getLogin} from '../../../fetchdata/loginFetcher'
+import styles from "../../../assets/jss/nextjs-material-dashboard/views/dashboardStyle.js";
+import Global from './components/global'
+import Recently from './components/recently'
+import Sbody from "../../../search/bodysearch"
+import Oops from "../../../search/openModal"
 import {motion} from 'framer-motion'
 
 
 
 
-const Dashboard = (props) => {
+const Dashboard = ({session}) => {
   const router = useRouter()
   const useStyles = makeStyles(styles);
   const classes = useStyles();
-  const[session, loading] = useSession();
   const[load, setLoad] = useState(false);
-  const {logins, isLoading, isError} = getLogin(props.email) 
   const [responsee, setResponse] = useState()
   const[content, setContent] = useState(true);
   const[iu, setIU] = useState(false)
@@ -45,24 +44,10 @@ const Dashboard = (props) => {
   }
  )
 
- 
-
- if(isError){return (<p>An error Occured</p>)}
-  if(isLoading){
-    return (
-      <div class="ui segment" style={{display: "flex", flexDirection : "column", justifyContent : "center", height : '100vh' }}>
-            <div class="ui active dimmer"style={{display: "flex", flexDirection : "row", justifyContent : "center", height : '100vh' }}>
-              <div class="ui huge text loader">Loading</div>
-            </div>
-          <p></p>
-          <p></p>
-      </div>
-  )}
   
   
 const onSearch = async(value) =>{
   setLoad(true);
-  console.log(value);
   let res = value.toLowerCase();
   
 
@@ -73,7 +58,7 @@ const onSearch = async(value) =>{
     }
   }
 
-  if(value != '' && res != logins.username){
+  if(value != '' && res != session.user.username){
     
     try{
       setForm(form.username = res)
@@ -140,23 +125,9 @@ const onSearch = async(value) =>{
 
 
 
-if( typeof window !== "undefined" && loading) return null;
-
-if(loading){
-  return (
-    <div class="ui segment" style={{display: "flex", flexDirection : "column", justifyContent : "center", height : '100vh' }}>
-            <div class="ui active dimmer"style={{display: "flex", flexDirection : "row", justifyContent : "center", height : '100vh' }}>
-              <div class="ui huge text loader">Loading</div>
-            </div>
-          <p></p>
-          <p></p>
-    </div>
-)
-
-}
 
 
-if (!session && !loading || session.user.email != props.email  || logins.section != "individual user" ){
+if (!session || session.user.section != "individual user" ){
   return (
       <main>
           <Oops />
@@ -169,6 +140,8 @@ const onLogout = async () =>{
   router.push('/');
 
 }
+
+
 
 
 const goHome = async() =>{
@@ -184,15 +157,19 @@ const goHome = async() =>{
 const goChat = async() =>{
   router.push({
     pathname: '/messenger/chats',
-    query: {email: session.user.email}
+   
 })
+
 }
 
 
 
 
+
+
+
       return (
-        <Admin goChat={goChat} goHome={goHome} onLogout={onLogout}  userName={logins.username} userPicture={session.user.image} onSearch={onSearch}>
+        <Admin goChat={goChat} goHome={goHome} session={session} onLogout={onLogout} userPicture={session.user.profilePicture}  userName={session.user.username} onSearch={onSearch}>
           {content && (
             <>
               <Global text1="Nigeria Top ten" text2="See all"/>
@@ -206,25 +183,25 @@ const goChat = async() =>{
           
         {iu && (
           <>
-            <Individual id={responsee.data._id} logins ={logins} />
+            <Individual id={responsee.data._id} logins ={session.user} />
           </>
         )}
 
         {musicart && (
           <>
-            <Artist id={responsee.data._id} logins ={logins} />
+            <Artist id={responsee.data._id} logins ={session.user} />
           </>
         )}  
 
         {label && (
           <>
-            <Label id={responsee.data._id} logins ={logins} />
+            <Label id={responsee.data._id} logins ={session.user} />
           </>
         )}  
 
         {videogr && (
           <>
-            <Videography id={responsee.data._id} logins ={logins} />
+            <Videography id={responsee.data._id} logins ={session.user} />
           </>
         )}  
 
@@ -258,10 +235,11 @@ const goChat = async() =>{
 
 }
 
-Dashboard.getInitialProps =  ({query}) =>{
-  const email = query.sect
+export async function getServerSideProps(ctx) {
   return {
-    email : email
+    props: {
+      session: await getSession(ctx)
+    }
   }
 }
 

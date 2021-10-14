@@ -1,15 +1,16 @@
 import {Typography} from '@material-ui/core'
 import Sidebar from "../../chatComponent/chatSidebar";
+import {signOut, getSession } from "next-auth/client"
 import Chatbox from "../../chatComponent/chatBox"
 import {useEffect, useState, useRef} from 'react'
 import {getLogin} from '../../fetchdata/loginFetcher'
 import axios from 'axios'
 import { io } from "socket.io-client";
-import Loading from './loading';
+import Oops from "../../search/openModal"
 
 
 
-export default function Chat(props){
+export default function Chat({session}){
     const [conversations, setConversations] = useState([]);
     const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
@@ -19,7 +20,6 @@ export default function Chat(props){
     const scrollRef = useRef();
     const [newMessage, setNewMessage] = useState("");
       
-    const {logins, isLoading, isError} = getLogin(props.email) 
 
 
 
@@ -43,13 +43,13 @@ export default function Chat(props){
     }, [arrivalMessage, currentChat]);
 
     useEffect(() => {
-      socket.current.emit("addUser", logins?._id);
+      socket.current.emit("addUser", session.user?._id);
       socket.current.on("getUsers", (users) => {
         setOnlineUsers(
-           logins?.followings?.filter((f) => users.some((u) => u.userId === f))
+           session.user?.followings?.filter((f) => users.some((u) => u.userId === f))
         );
       });
-    }, [logins]);
+    }, [session.user]);
 
 
 
@@ -58,7 +58,7 @@ export default function Chat(props){
     useEffect(() => {
         const getConversations = async () => {
           try {
-            const res = await axios.get("/api/conversations/" + logins?._id);
+            const res = await axios.get("/api/conversations/" + session.user?._id);
             console.log(res.data)
             setConversations(res.data);
           } catch (err) {
@@ -66,7 +66,7 @@ export default function Chat(props){
           }
         };
         getConversations();
-      }, [logins]); //remember the dependency
+      }, [session.user]); //remember the dependency
 
 
       useEffect(() => {
@@ -81,29 +81,34 @@ export default function Chat(props){
         getMessages();
       }, [currentChat]);
 
-
-
-      if(isError){return (<p>An error Occured</p>)}
-
-      if(isLoading){
+      if (!session){
         return (
-          <Loading />
-      )}
+            <main>
+                <Oops />
+            </main>
+        )
+      }
+      
+
+
+
+      
     
       const handleSubmit = async(e) =>{
           e.preventDefault();
           const message = {
-            sender: logins._id,
+            sender: session.user._id,
             text: newMessage,
             conversationId: currentChat._id,
+            profile : session.user.profilePicture,
           };
 
           const receiverId = currentChat.members.find(
-            (member) => member !== logins._id
+            (member) => member !== session.user._id
           );
  
           socket.current.emit("sendMessage", {
-            senderId: logins?._id,
+            senderId: session.user?._id,
             receiverId,
             text: newMessage,
           });
@@ -122,15 +127,16 @@ export default function Chat(props){
      
     return(
        <div className="container" style={{height : "100vh", width : "100hh"}}>
-            <Sidebar setCurrentChat={setCurrentChat} conversations={conversations} logins={logins} >
+            <Sidebar setCurrentChat={setCurrentChat} conversations={conversations} logins={session.user} >
                 {/* <Typography variant="h5" style={{fontFamily: "Lora"}}>Hello chat world.. we will create you</Typography> */}
                {currentChat ? (
                  <Chatbox
                    newMessage={newMessage}
+                   conversations = {conversations}
                    setNewMessage={setNewMessage} 
                    handleSubmit={handleSubmit} 
                    messages={messages} 
-                   user = {logins} />
+                   user = {session.user} />
 
                ): (
                 <span className="noConversationText" style={{position : "absolute", top: "10%", fontSize : "50px", color : "rgb(224, 220, 220)", cursor : "default"}}>
@@ -142,10 +148,10 @@ export default function Chat(props){
         </div>
     )
 }
-
-Chat.getInitialProps =  ({query}) =>{
-  const email = query.email
+export async function getServerSideProps(ctx) {
   return {
-    email : email
+    props: {
+      session: await getSession(ctx)
+    }
   }
 }

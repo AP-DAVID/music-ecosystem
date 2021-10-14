@@ -21,7 +21,7 @@ import {motion} from 'framer-motion';
 
 let ps;
 
-export default function Admin({goChat, goHome, onLogout, userPicture, onSearch, userName, userEmail, children, ...rest}) {
+export default function Admin({goChat, goHome, onLogout, session, userPicture, onSearch, userName, userEmail, children, ...rest}) {
   // used for checking current route
   const router = useRouter();
   // styles
@@ -105,10 +105,11 @@ export default function Admin({goChat, goHome, onLogout, userPicture, onSearch, 
 
       
       <Sidebar
-        userPicture = {userPicture}
+        userPicture={userPicture}
         routes={routes}
         logoText={"Musco"}
         logo={logo}
+
         image={image}
         handleDrawerToggle={handleDrawerToggle}
         open={mobileOpen}
@@ -121,6 +122,7 @@ export default function Admin({goChat, goHome, onLogout, userPicture, onSearch, 
           goHome = {goHome}
           onLogout = {onLogout}
           onSearch = {onSearch}
+          session = {session}
           userEmail = {userEmail}
           userName = {userName}
           routes={routes}

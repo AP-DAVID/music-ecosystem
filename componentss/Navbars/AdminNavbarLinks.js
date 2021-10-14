@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classNames from "classnames";
 import Link from 'next/link'
 // @material-ui/core components
@@ -28,9 +28,11 @@ import Button from "..//CustomButtons/Button.js";
 import useWindowSize from "../Hooks/useWindowSize.js";
 
 import styles from "../../assets/jss/nextjs-material-dashboard/components/headerLinksStyle.js";
+import ProfileModal from "../../components/profileModal";
 
-export default function AdminNavbarLinks({onSearch, onLogout}) {
+export default function AdminNavbarLinks({onSearch, onLogout, session}) {
   const router = useRouter()
+  const [showModal, setShowModal] = useState(false);
   const size = useWindowSize();
   const useStyles = makeStyles(styles);
   const classes = useStyles();
@@ -53,6 +55,11 @@ export default function AdminNavbarLinks({onSearch, onLogout}) {
       setOpenProfile(event.currentTarget);
     }
   };
+
+  const modalShow = () => {
+    setShowModal(true)
+  }
+
   const handleCloseProfile = () => {
     setOpenProfile(null);
   };
@@ -68,10 +75,14 @@ export default function AdminNavbarLinks({onSearch, onLogout}) {
       <div className={classes.searchWrapper}>
 
 
+      
+
+
         
      
 
       </div>
+      {showModal && (<ProfileModal setShowModal={setShowModal}/>)}
       <Button
         color={size.width > 959 ? "transparent" : "white"}
         justIcon={size.width > 959}
@@ -210,11 +221,14 @@ export default function AdminNavbarLinks({onSearch, onLogout}) {
                     <Divider light />
 
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      onClick={modalShow}
                       className={classes.dropdownItem}
                     >
                       Edit profile
                     </MenuItem>
+
+
+                     
                     <Divider light />
                     <MenuItem
                       onClick={handleLogOut}

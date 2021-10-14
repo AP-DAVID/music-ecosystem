@@ -68,7 +68,7 @@ const Body3 = ({register, onfollow, text, onChat}) => {
                     >
                       <img
                         alt="..."
-                        src="/img/yeah.jpeg"
+                        src={register.profilePicture ? register.profilePicture :  "https://media.istockphoto.com/photos/human-hologram-of-people-crowd-picture-id1177346488?b=1&k=20&m=1177346488&s=170667a&w=0&h=_awbjaBImKOwWidDq7OwuIk1Ej8ml9YsmWdz8gTreww="}
                         className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                       />
                     </motion.div>

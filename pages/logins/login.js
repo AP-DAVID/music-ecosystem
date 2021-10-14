@@ -59,6 +59,7 @@ const handleSubmit = async(e) =>{
         try{
           
           const response = await axios.post('/api/login', JSON.stringify(form) , config)
+          console.log(response)
           if(response.data === "User not found"){
             setValidation("The User does not Exist");
           }
@@ -105,39 +106,33 @@ useEffect(() =>{
     }
   
       try{
-        setForm2(form2.email = session.user.email)
-        console.log(form.email)
-        const response = await axios.post('/api/users/', JSON.stringify(form2) , config)
-    
-      if(response.data.section === "individual user"){
-        router.push({
-          pathname: '/profile_pages/users_profile/profile',
-          query: {sect : session.user.email}
-      })
-      }
-      
-      if(response.data.section === "music artist"){
-        router.push({
-          pathname: '/profile_pages/artist_profile/profile',
-          query: {sect : session.user.email}
-      })
-      
-      }
-      
-      if(response.data.section === "record label"){
-        router.push({
-          pathname: '/profile_pages/label_profile/profile',
-          query: {sect : session.user.email}
-      })
-      }
-  
-      if(response.data.section === "videographer"){
-        router.push({
-          pathname: '/profile_pages/videographer_profile/profile',
-          query: {sect : session.user.email}
-      })
-      }
         
+    
+        if(session.user.section === "individual user"){
+          router.push({
+            pathname: '/profile/users'
+        })
+        }
+        
+        if(session.user.section === "music artist"){
+          router.push({
+            pathname: '/profile/artist'
+        })
+        
+        }
+        
+        if(session.section === "record label"){
+          router.push({
+            pathname: '/profile/label'
+        })
+        }
+    
+        if(session.user.section === "videographer"){
+          router.push({
+            pathname: '/profile/videographer'
+        })
+        }
+          
         
       }catch(error){
           console.log(error)
@@ -158,7 +153,7 @@ const containerVariants ={
 
   visible : {
       opacity : 1,
-      transition : {delay : 5.0, duration : 2}
+      transition : {delay : 1.0, duration : 2}
   },
   exit : {
     x : '-100vw',

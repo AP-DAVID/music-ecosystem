@@ -15,6 +15,10 @@ import { AudioOutlined } from '@ant-design/icons';
 import Hidden from "@material-ui/core/Hidden";
 import { Input, Space } from 'antd';
 // @material-ui/icons
+
+
+
+
 import Menu from "@material-ui/icons/Menu";
 // core components
 import AdminNavbarLinks from "./AdminNavbarLinks.js";
@@ -31,6 +35,44 @@ export default function Header(props) {
   
   // used for checking current route
   const router = useRouter();
+
+  const perform = async() => {
+      try{
+        
+    
+        if(props.session.user.section === "individual user"){
+          router.push({
+            pathname: '/profile/users'
+        })
+        }
+        
+        if(props.session.user.section === "music artist"){
+          router.push({
+            pathname: '/profile/artist'
+        })
+        
+        }
+        
+        if(props.session.section === "record label"){
+          router.push({
+            pathname: '/profile/label'
+        })
+        }
+    
+        if(props.session.user.section === "videographer"){
+          router.push({
+            pathname: '/profile/videographer'
+        })
+        }
+        
+        
+      }catch(error){
+          console.log(error)
+      }
+  }
+
+
+
   // create styles for this component
   const useStyles = makeStyles(styles);
   const classes = useStyles();
@@ -62,7 +104,7 @@ export default function Header(props) {
               </Button>
 
 
-            <IconButton aria-label="delete" onClick={props.goHome}>
+            <IconButton aria-label="delete" onClick={props.goHome ? props.goHome : perform}>
               <HomeTwoToneIcon style={{ width: 50}}/>
             </IconButton> 
 
@@ -101,7 +143,7 @@ export default function Header(props) {
 
         </div>
         <Hidden smDown implementation="css">
-          {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks onLogout = {props.onLogout}/>}
+          {props.rtlActive ? <RTLNavbarLinks session = {props.session}/> : <AdminNavbarLinks session = {props.session} onLogout = {props.onLogout}/>}
         </Hidden>
         <Hidden mdUp implementation="css">
           <IconButton

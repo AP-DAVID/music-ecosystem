@@ -26,12 +26,10 @@ export default class Searches extends Component {
     const userss = async() =>{
       try{
           const response = await axios.get('/api/getUsers');
-          console.log(response.data)
       
           var obj = await [];
           var res = await Array.from(response.data, x => obj.push({title : x.username, description : x.description, image : x.profilePicture, price : `${x.age}`}));
-        
-          await console.log(obj); 
+         
           this.setState({
             details : obj
           })

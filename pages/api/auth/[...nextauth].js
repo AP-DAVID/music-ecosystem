@@ -3,8 +3,8 @@ import Providers from "next-auth/providers";
 import axios from "axios";
 
 
-const options ={
-    providers: [
+
+   const providers = [
         Providers.Credentials({
             id: "email-login", 
             name : "Credentials",
@@ -21,9 +21,23 @@ const options ={
                         }
                     }
                     const baseUrl = "https://muscotest5a.vercel.app";
-                    const response = await axios.post(baseUrl + '/api/login2', credentials, config)
+                    const res = await fetch(baseUrl + '/api/login2', {
+                        method: 'POST',
+                        body: JSON.stringify(credentials),
+                        headers: {
+                          'Content-Type': 'application/json',
+                        },
+                    })
+
+                     const user = await res.json();
                     
-                    return response.data
+                    console.log(user)
+                    
+                    if(user){
+                        return user
+                    }
+                    
+                    
 
                 }catch(error){
                     console.log(err0r)
@@ -45,9 +59,30 @@ const options ={
             
         })
        
-    ],
-    session :{
-        jwt : true
+    ]
+
+    const callbacks =  {
+        async signIn(user) {
+          return user._id;
+        },
+        async session(session, token) {
+          session.user = token.user;
+          return session;
+        },
+        async jwt(token, user) {
+          if (user) token.user = user;
+          return token;
+        },
     }
-}
+
+
+
+  const options = {
+    providers,
+    callbacks,
+   
+  }
+
+    
+
 export default (req, res) => NextAuth(req, res, options);

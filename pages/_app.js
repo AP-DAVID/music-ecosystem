@@ -2,6 +2,7 @@ import "../styles/tailwind.css";
 import '../styles/globals.css'
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import _ from 'lodash';
 import 'antd/dist/antd.css';
 import 'semantic-ui-css/semantic.min.css'
 import {Provider} from "next-auth/client"

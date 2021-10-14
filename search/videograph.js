@@ -86,8 +86,7 @@ const onfollow = async () =>{
         const response = await axios.post('/api/conversations', JSON.stringify(form) , config)
         console.log(response)
         router.push({
-          pathname: '/messenger/chats',
-          query: {email: logins?.email}
+          pathname: '/messenger/chats'
       })
       }catch(error){
           console.log(error)

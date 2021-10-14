@@ -44,7 +44,7 @@ const Body2 = ({register, onfollow, onChat}) => {
                     <div className="relative">
                       <img
                         alt="..."
-                        src="/img/sketch.jpg"
+                        src={register.profilePicture ? register.profilePicture : "/img/sketch.jpg"}
                         className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                       />
                     </div>

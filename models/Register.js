@@ -14,6 +14,9 @@ const RegisterSchema = new mongoose.Schema({
        type : String,
        required : true,
    },
+   artist : {
+      type : String,
+   },
    email:{
        type : String,
        required : true,
@@ -64,9 +67,9 @@ const RegisterSchema = new mongoose.Schema({
       type: String,
       default: "",
     },
-   isloggedin : {
-       type : Boolean,
-       default : false
+    music: {
+       type : Array,
+       default : [],
    }
    
 

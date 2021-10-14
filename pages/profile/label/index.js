@@ -1,27 +1,21 @@
 import React, { useState } from "react";
 
-import Navbar from "../../../../components/Navbars/AuthNavbar.js";
-import Footer from "../../../../components/Footers/Footer.js";
-import Admin from "../../../../components/Admin.js";
-import Body from '../components/body'
-import Individual from "../../../../search/individualsearch"
-import Artist from "../../../../search/artistsearch"
-import Label from "../../../../search/labelsearch"
-import Videography from "../../../../search/videograph"
-import Button from '@material-ui/core/Button';
+import Navbar from "../../../components/Navbars/AuthNavbar.js";
+import Footer from "../../../components/Footers/Footer.js";
+import Admin from "../../../components/Admin.js";
+import Body from './components/body'
+import Individual from "../../../search/individualsearch"
+import Artist from "../../../search/artistsearch"
+import Label from "../../../search/labelsearch"
+import Videography from "../../../search/videograph"
 import {useRouter} from 'next/router'
-import {signOut, useSession } from "next-auth/client";
+import {signOut, getSession } from "next-auth/client";
 import axios from 'axios';
-import {getLogin} from '../../../../fetchdata/loginFetcher'
-import {getUser} from '../../../../fetchdata/registerFetcher'
-import Sbody from "../../../../search/bodysearch"
-import Oops from "../../../../search/openModal"
-import {motion} from 'framer-motion'
+import Sbody from "../../../search/bodysearch"
+import Oops from "../../../search/openModal"
 
-export default function Artistt(props) {
+export default function Recordlabel({session}) {
   const router = useRouter()
-  const[session, loading] = useSession();
-  const {logins, isLoading, isError} = getLogin(props.email) 
   const [responsee, setResponse] = useState()
   const[content, setContent] = useState(true);
   const[iu, setIU] = useState(false)
@@ -49,7 +43,8 @@ const onSearch = async(value) =>{
         'Content-type' : "application/json"
     }
   }
-  if(value != ''&& value != logins.username){
+
+  if(value != '' && value != session.user.username){
     try{
       setForm(form.username = res)
       const response = await axios.post('/api/search', JSON.stringify(form) , config)
@@ -60,13 +55,10 @@ const onSearch = async(value) =>{
     })
       await setResponse(response);
       setContent(false);
-      console.log(response)
-
       if(response.data.status === 404){
         setSearch(true)
       }
      
-
 
       if (response.data.section === "individual user") {
 
@@ -109,47 +101,22 @@ const onSearch = async(value) =>{
 
 
 
-  if(isError){return (<p>An error Occured</p>)}
-  if(isLoading){
-    return (
-      <div class="ui segment" style={{display: "flex", flexDirection : "column", justifyContent : "center", height : '100vh' }}>
-            <div class="ui active dimmer"style={{display: "flex", flexDirection : "row", justifyContent : "center", height : '100vh' }}>
-              <div class="ui huge text loader">Loading</div>
-            </div>
-          <p></p>
-          <p></p>
-      </div>
-      
-    )}
 
-  if(loading){
-    return (
-      <div class="ui segment" style={{display: "flex", flexDirection : "column", justifyContent : "center", height : '100vh' }}>
-            <div class="ui active dimmer"style={{display: "flex", flexDirection : "row", justifyContent : "center", height : '100vh' }}>
-              <div class="ui huge text loader">Loading</div>
-            </div>
-          <p></p>
-          <p></p>
-      </div>
-  )
-  }
 
-  if (!session && !loading || session.user.email != props.email || logins.section != "music artist"){
+  if (!session || session.user.section != "record label"){
     return (
         <main>
             <Oops />
         </main>
     )
   }
-  
+
   const onLogout = async () =>{
     await signOut()
     router.push('/');
   
   }
   
-  
-
   const goHome = async() =>{
     setContent(true);
     setVideogr(false)
@@ -163,19 +130,26 @@ const onSearch = async(value) =>{
   const goChat = async() =>{
     router.push({
       pathname: '/messenger/chats',
-      query: {email: session.user.email}
+    
   })
   }
   
+
   
   return (
-    <Admin goChat={goChat} goHome={goHome} onLogout={onLogout}  userName={logins.username} onSearch={onSearch}>
+    <Admin goChat ={goChat} goHome={goHome} session={session}userPicture={session.user.profilePicture} onLogout = {onLogout} userName={session.user.username} onSearch={onSearch}>
       
        {content && (
         <>
           <Navbar transparent />
-            <Body userName={logins.username} userEmail={logins.email} description={logins.description} followers={logins.followers.length}
-              following={logins.following.length}
+            <Body 
+               userName={session.user.username} 
+               userEmail={session.user.email} 
+               description={session.user.description} 
+               image={session.user.profilePicture}
+               followers={session.user.followers.length}
+               following={session.user.following.length}   
+
             />
           <Footer />
 
@@ -184,29 +158,28 @@ const onSearch = async(value) =>{
 
         {iu && (
           <>
-            <Individual id={responsee.data._id} logins ={logins} />
+            <Individual id={responsee.data._id} logins ={session.user} />
           </>
         )}
 
         {musicart && (
           <>
-            <Artistt id={responsee.data._id} logins ={logins} />
+            <Artist id={responsee.data._id} logins ={session.user} />
           </>
         )}  
 
         {label && (
           <>
-            <Label id={responsee.data._id} logins ={logins} />
+            <Label id={responsee.data._id} logins ={session.user} />
           </>
         )}  
 
         {videogr && (
           <>
-            <Videography id={responsee.data._id} logins ={logins} />
+            <Videography id={responsee.data._id} logins ={session.user} />
           </>
         )}  
-
-       {bsearch && (
+        {bsearch && (
           <>
             <Sbody svg="/search.svg" />
           </>
@@ -216,9 +189,11 @@ const onSearch = async(value) =>{
   );
 }
 
-Artistt.getInitialProps =  ({query}) =>{
-  const email = query.sect
+
+export async function getServerSideProps(ctx) {
   return {
-    email : email
+    props: {
+      session: await getSession(ctx)
+    }
   }
 }

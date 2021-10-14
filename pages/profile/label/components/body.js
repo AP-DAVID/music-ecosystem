@@ -1,56 +1,13 @@
-import {motion} from 'framer-motion'
-
-const Body = ({userName, userEmail, description, followers, following}) => {
-
-
-  const containerVariants ={
-    hidden :{
-        x : '-100vw',
-    },
-
-    visible : {
-        x : 0,
-        transition : {duration : 1.5, delay : 0.2, type : "spring", stiffness : 120}
-    },
-    exit : {
-        x : '-100vw',
-        transition : {ease : 'easeInOut'}
-    }
-}
-
-const Variants ={
-  hidden :{
-     opacity : 0,
-  },
-
-  visible : {
-      opacity : 1,
-      transition : {delay : 0.5, duration : 2}
-  },
-  exit : {
-    x : '-100vw',
-    transition : {ease : 'easeInOut', duration : 0.5}
-
-  }
-}
-
-
-
-
-
-
-
-
-
+const Body = ({userName, userEmail, followers,image, following, description}) => {
     return ( 
-        <>
-            <main className="profile-page">
+       <>
+        <main className="profile-page">
         <section className="relative block h-500-px">
           <div
             className="absolute top-0 w-full h-full bg-center bg-cover"
             style={{
               backgroundImage:
-                "url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2710&q=80')",
+                "url('https://images.unsplash.com/photo-1547822686-8ba163e1122a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80')",
             }}
           >
             <span
@@ -80,36 +37,43 @@ const Variants ={
         </section>
         <section className="relative py-16 bg-blueGray-200">
           <div className="container mx-auto px-4">
-            <motion.div 
-               className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
-               variants = {Variants}
-               initial = "hidden"
-               animate="visible"
-               exit="exit"
-            >
+            <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
               <div className="px-6">
                 <div className="flex flex-wrap justify-center">
                   <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                     <div className="relative">
-                      <motion.img
-                        variants = {containerVariants}
-                        initial = "hidden"
-                        animate="visible"
-                        exit="exit"
+                      <img
                         alt="..."
-                        src="/img/yeah.jpeg"
+                        src={image? image : "/img/sketch.jpg"}
                         className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                       />
                     </div>
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
                     <div className="py-6 px-3 mt-32 sm:mt-0">
+
+                    <button
+                        className="bg-blueGray-700 active:bg-blueGray-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                      >
+                       Chats
+                      </button>
+
                       <button
                         className="bg-blueGray-700 active:bg-blueGray-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                         type="button"
                       >
-                        Edit profile
+                       Edit Profile
                       </button>
+                      
+                      <button
+                        className="bg-blueGray-700 active:bg-blueGray-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                      >
+                       Songs Received
+                      </button>
+                        
+
                     </div>
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-1">
@@ -119,7 +83,7 @@ const Variants ={
                          {followers}
                         </span>
                         <span className="text-sm text-blueGray-400">
-                         followers
+                          Followers
                         </span>
                       </div>
                       <div className="mr-4 p-3 text-center">
@@ -127,15 +91,15 @@ const Variants ={
                           {following}
                         </span>
                         <span className="text-sm text-blueGray-400">
-                          following
+                          Following
                         </span>
                       </div>
                       <div className="lg:mr-4 p-3 text-center">
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                         2
+                          89
                         </span>
                         <span className="text-sm text-blueGray-400">
-                          likes
+                          Comments
                         </span>
                       </div>
                     </div>
@@ -151,11 +115,11 @@ const Variants ={
                   </div>
                   <div className="mb-2 text-blueGray-600 mt-10">
                     <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
-                    {userEmail}
+                    Record label
                   </div>
                   <div className="mb-2 text-blueGray-600">
                     <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-                    Babcock university
+                    {userEmail}
                   </div>
                 </div>
                 <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
@@ -175,11 +139,11 @@ const Variants ={
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
       </main>
-        </>
+       </>
      )
 }
  

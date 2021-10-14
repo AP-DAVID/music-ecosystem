@@ -12,6 +12,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Icon from "@material-ui/core/Icon";
+import Image from 'next/image'
 // core components
 import AdminNavbarLinks from "..//Navbars/AdminNavbarLinks.js";
 import RTLNavbarLinks from "../Navbars/RTLNavbarLinks.js";
@@ -28,7 +29,8 @@ export default function Sidebar(props) {
   function activeRoute(routeName) {
     return router.route.indexOf(routeName) > -1 ? true : false;
   }
-  const { color, logo, image, logoText, routes } = props;
+  const { color, logo, image, logoText, routes, userPicture } = props;
+  
   var links = (
     <List className={classes.list}>
       {routes.map((prop, key) => {
@@ -93,7 +95,7 @@ export default function Sidebar(props) {
         target="_blank"
       >
         <div className={classes.logoImage}>
-          <img src={props.userPicture} alt="logo" className={classes.img} />
+          <img src={userPicture ? userPicture : "https://react.semantic-ui.com/images/wireframe/square-image.png"} className="rounded-full object-cover"  alt="logo" />
         </div>
         {logoText}
       </a>

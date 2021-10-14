@@ -44,7 +44,7 @@ const Body = ({register, onfollow, onChat}) => {
                     <div className="relative">
                       <img
                         alt="..."
-                        src="/img/yeah.jpeg"
+                        src={register.profilePicture ? register.profilePicture :  "https://media.istockphoto.com/photos/human-crowd-forming-man-icon-on-white-background-picture-id1255580484?b=1&k=20&m=1255580484&s=170667a&w=0&h=DtN1uEUvi1NXTN-S6v3rfPY1oHK2BW5pzeWZf_Jx_2s="}
                         className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                       />
                     </div>

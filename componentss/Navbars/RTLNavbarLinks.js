@@ -75,7 +75,7 @@ export default function RTLNavbarLinks({onSearch}) {
       >
         <Dashboard className={classes.icons} />
         <Hidden mdUp implementation="css">
-          <p className={classes.linkText}>آمارها</p>
+          <p className={classes.linkText}> آمارها </p>
         </Hidden>
       </Button>
       <div className={classes.manager}>
@@ -165,7 +165,7 @@ export default function RTLNavbarLinks({onSearch}) {
       >
         <Person className={classes.icons} />
         <Hidden mdUp implementation="css">
-          <p className={classes.linkText}>حساب کاربری</p>
+          <p className={classes.linkText}> حساب کاربری </p>
         </Hidden>
       </Button>
     </div>

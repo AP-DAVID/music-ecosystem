@@ -24,71 +24,73 @@ import LocationOn from "@material-ui/icons/LocationOn";
 import Notifications from "@material-ui/icons/Notifications";
 import Unarchive from "@material-ui/icons/Unarchive";
 import Language from "@material-ui/icons/Language";
+import { Chat, Twitter } from "@material-ui/icons";
 
 const dashboardRoutes = [
+  
   {
     path: "/",
-    name: "Home",
-    rtlName: "منزل، بيت",
-    icon: Dashboard,
-
-    layout: "/admin",
-  },
-  {
-    path: "/user-profile",
     name: "Artists",
     rtlName: "الفنانين",
     icon: Person,
 
-    layout: "/getArtist",
+    layout: "/artists",
   },
   {
-    path: "/albums",
+    path: "/",
     name: "Albums",
     rtlName: "ألبومات",
     icon: "content_paste",
 
-    layout: "/admin",
+    layout: "/albums",
   },
   {
-    path: "/recent",
-    name: "recent",
-    rtlName: "الأخيرة",
+    path: "/",
+    name: "Profile",
+    rtlName: " الملف الشخصي  ",
     icon: LibraryBooks,
 
-    layout: "/admin",
+    layout: "/user",
   },
   {
-    path: "/Favourite",
+    path: "/",
     name: "Favourite",
     rtlName: "المفضل",
     icon: BubbleChart,
 
-    layout: "/admin",
+    layout: "/favourite",
   },
   {
-    path: "/maps",
+    path: "/",
+    name: "Music Tweets",
+    rtlName: "تغريدة الموسيقى",
+    icon: Twitter,
+
+    layout: "/tweet",
+  },
+  {
+    path: "/",
     name: "Local",
     rtlName: "محلي",
     icon: LocationOn,
 
-    layout: "/admin",
+    layout: "/maps",
   },
   {
-    path: "/notifications",
-    name: "Create New playlist",
-    rtlName: "إنشاء قائمة تشغيل جديدة",
+    path: "/",
+    name: "Notifications",
+    rtlName: "إشعارات",
     icon: Notifications,
 
-    layout: "/admin",
+    layout: "/notifications",
   },
   {
-    path: "/settings",
+    path: "/",
     name: "Settings",
     rtlName: "إعدادات",
     icon: Language,
 
-    layout: "/rtl",
+    layout: "/settings",
   },
   {
     path: "/Logout",
