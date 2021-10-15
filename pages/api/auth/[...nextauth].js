@@ -20,7 +20,7 @@ import axios from "axios";
                             'Content-type' : "application/json"
                         }
                     }
-                    const baseUrl = "https://muscotest5a.vercel.app";
+                    const baseUrl = "https://musco.herokuapp.com";
                     const res = await fetch(baseUrl + '/api/login2', {
                         method: 'POST',
                         body: JSON.stringify(credentials),
