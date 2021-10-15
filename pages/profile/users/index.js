@@ -7,17 +7,15 @@ import Artist from "../../../search/artistsearch"
 import { getSession } from "next-auth/client"
 import Label from "../../../search/labelsearch"
 import Videography from "../../../search/videograph"
-import Button from '@material-ui/core/Button';
 import {useRouter, withRouter} from 'next/router'
 import axios from 'axios';
 import Admin from "../../../components/Admin.js";
-import {getLogin} from '../../../fetchdata/loginFetcher'
 import styles from "../../../assets/jss/nextjs-material-dashboard/views/dashboardStyle.js";
 import Global from './components/global'
 import Recently from './components/recently'
 import Sbody from "../../../search/bodysearch"
 import Oops from "../../../search/openModal"
-import {motion} from 'framer-motion'
+
 
 
 
@@ -51,23 +49,13 @@ const onSearch = async(value) =>{
   let res = value.toLowerCase();
   
 
-  const config = {
-    headers: {
-        "Accept" : "application/json",
-        'Content-type' : "application/json"
-    }
-  }
-
   if(value != '' && res != session.user.username){
     
     try{
       setForm(form.username = res)
-      const response = await axios.post('/api/search', JSON.stringify(form) , config)
-      setForm({
-        ...form,
-        username : '',
-        email : ''
-    })
+      const response = await axios.get(`/api/search/${res}`)
+    
+
       await setResponse(response);
       setContent(false);
       if(response.data.status === 404){

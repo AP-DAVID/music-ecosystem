@@ -40,22 +40,13 @@ const onSearch = async(value) =>{
   console.log(value);
   let res = value.toLowerCase();
 
-  const config = {
-    headers: {
-        "Accept" : "application/json",
-        'Content-type' : "application/json"
-    }
-  }
+  
   
   if(value != ''&& value != session.user.username){
     try{
       setForm(form.username = res)
-      const response = await axios.post('/api/search', JSON.stringify(form) , config)
-      setForm({
-        ...form,
-        username : '',
-        email : ''
-    })
+      const response = await axios.get(`/api/search/${res}`)
+     
       await setResponse(response);
       setContent(false);
 

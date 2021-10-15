@@ -87,7 +87,7 @@ export async function getServerSideProps(ctx) {
 
   const session = await getSession(ctx);
 
-  const res = await fetch(`https://musco.herokuapp.com/api/tweet/${session.user._id}`)
+  const res = await fetch(`https://muscotest5a.vercel.app/api/tweet/${session.user._id}`)
   const dataa = await res.json()
   const data = dataa.reverse();
 

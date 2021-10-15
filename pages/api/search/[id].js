@@ -13,7 +13,7 @@ handler.get(async(req, res)=>{
     }= req
     
     try {
-        const loginn = await Register.findOne({email : id});
+        const loginn = await Register.findOne({username : id});
         !loginn && res.status(404).json("User not found");
         
         res.status(200).json(loginn)
@@ -23,6 +23,13 @@ handler.get(async(req, res)=>{
             res.status(400).json({success:false, error:error})
     }
 })
+
+
+
+
+
+
+
 
 
 

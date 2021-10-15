@@ -1,9 +1,8 @@
-import {Typography} from '@material-ui/core'
+
 import Sidebar from "../../chatComponent/chatSidebar";
 import {signOut, getSession } from "next-auth/client"
 import Chatbox from "../../chatComponent/chatBox"
 import {useEffect, useState, useRef} from 'react'
-import {getLogin} from '../../fetchdata/loginFetcher'
 import axios from 'axios'
 import { io } from "socket.io-client";
 import Oops from "../../search/openModal"

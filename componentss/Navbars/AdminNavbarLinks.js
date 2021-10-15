@@ -11,8 +11,6 @@ import Openmodal from '../../search/openModal'
 import Paper from "@material-ui/core/Paper";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Hidden from "@material-ui/core/Hidden";
-import IconButton from '@material-ui/core/IconButton';
-import HomeIcon from '@material-ui/icons/Home';
 import Poppers from "@material-ui/core/Popper";
 import Divider from "@material-ui/core/Divider";
 // @material-ui/icons
@@ -23,7 +21,8 @@ import {signOut, useSession } from "next-auth/client";
 import Dashboard from "@material-ui/icons/Dashboard";
 const { Search } = Input;
 // core components
-import CustomInput from "../CustomInput/CustomInput.js";
+
+
 import Button from "..//CustomButtons/Button.js";
 import useWindowSize from "../Hooks/useWindowSize.js";
 
