@@ -61,7 +61,7 @@ const handleSubmit = async(e) =>{
           const response = await axios.post('/api/login', JSON.stringify(form) , config)
           console.log(response)
           if(response.data === "User not found"){
-            setValidation("The User does not Exist");
+            setValidation("The User does not Exist.");
           }
           else if(response.data === "Wrong Password"){
             setValidation("Invalid Password?");
