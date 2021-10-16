@@ -9,7 +9,7 @@ function Profiletweet({session, data}) {
     return (
         <div>
             <div className="flex justify-between px-7 mt-5 items-start py-7 border-2 shadow-lg rounded-lg">
-                <div>
+                <div className="p-3">
                    
                    <div className=" flex justify-between w-full items-center">
                         <img src={session.user.profilePicture} alt="Profile picture" className="cursor-pointer h-20 w-20 rounded-full mt-5 object-cover" /><br/>
@@ -54,7 +54,7 @@ function Profiletweet({session, data}) {
 
                 <div>
                     {
-                        data.map((content) => (
+                        data?.map((content) => (
                             <Profilebox data={content} session={session} />
                         ))
                     }

@@ -99,12 +99,12 @@ useEffect(() => {
              <div className="flex px-4 py-2 h-11 space-x-2 items-center">
 
                 <div className="flex items-center" >
-                    <div><HeartIcon className="h-4 text-red-500"/></div>
+                    <div><HeartIcon className="h-5 w-5 text-red-500"/></div>
                     <div><h1 className="text-xs font-extralight">22</h1></div>
                 </div>
                 
                 <div className="flex items-center">
-                    <div><UserIcon className="h-4"/></div>
+                    <div><UserIcon className="h-5 w-5"/></div>
                     <div><h1 className="text-xs font-extralight">{`see ${user?.username} other Tweets`}</h1></div>
                 </div>
             </div>

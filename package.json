@@ -61,9 +61,9 @@
     "timeago.js": "^4.0.2"
   },
   "devDependencies": {
-    "autoprefixer": "^10.2.5",
-    "postcss": "^8.2.15",
-    "tailwindcss": "^2.1.2"
+    "autoprefixer": "^10.3.7",
+    "postcss": "^8.3.9",
+    "tailwindcss": "^2.2.17"
   },
   "eslintConfig": {
     "extends": "react-app"

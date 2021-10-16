@@ -10,7 +10,7 @@ import Oops from "../search/openModal"
 import axios from "axios"
 import {RefreshIcon} from "@heroicons/react/outline"
 
-function tweet() {
+function Tweet() {
 
    const [change, setChange] = useState(false);
    const [data, setData] = useState();
@@ -40,7 +40,7 @@ function tweet() {
     return (
         
       <div class="w-full h-full  fixed block top-0 left-0 bg-white opacity-75 z-50">
-                      <link rel="stylesheet" href="https://pagecdn.io/lib/font-awesome/5.10.0-11/css/all.min.css" integrity="sha256-p9TTWD+813MlLaxMXMbTA7wN/ArzGyW/L7c5+KkjOkM=" crossorigin="anonymous" />
+                      <link rel="stylesheet" href="https://pagecdn.io/lib/font-awesome/5.10.0-11/css/all.min.css" integrity="sha256-p9TTWD+813MlLaxMXMbTA7wN/ArzGyW/L7c5+KkjOkM=" crossOrigin="anonymous" />
                       <span class="text-blue-500 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0" style={{top : "50%"}} 
                       >
                           <i class="fab fa-twitter fa-spin fa-5x"></i>
@@ -75,6 +75,9 @@ function tweet() {
         <Admin session={session} userPicture={session.user.profilePicture} userName={session.user.username}>
 
 
+                 {showModal && (<TweetModal setShowModal={setShowModal} refreshData={refreshData} session={session}/>)}
+
+
             <div>
                 <h1>Tweets</h1>
                 
@@ -93,7 +96,7 @@ function tweet() {
 
                 </div>
 
-                {/* <RefreshIcon onClick={refreshNow} className={`h-7 ml-3 mt-3 w-7 text-right ${spin? "animate-spin" : "animate-none"} text-blue-500`}/> */}
+                <RefreshIcon onClick={refreshNow} className={`h-7 ml-3 mt-3 w-7 text-right ${spin? "animate-spin" : "animate-none"} text-blue-500`}/>
 
                {!change ? ( <div className="sm:px-5  my-10 sm:mr:10 justify-items-stretch sm:space-x-3 sm:grid md:grid:cols-2 lg:grid-cols-2 xl:grid-cols-3 3xl:flex flex-wrap justify-center">
                   
@@ -104,7 +107,7 @@ function tweet() {
                     <h1 className="text-gray-500 text-center mt-16">follow a user to view their tweets</h1>
                   ):
                   
-
+               
                 
                   data?.map((content) =>  
                       
@@ -136,7 +139,7 @@ function tweet() {
             </div>
 
 
-            {showModal && (<TweetModal setShowModal={setShowModal} refreshData={refreshData} session={session}/>)}
+           
 
         </Admin>
     )
@@ -161,4 +164,4 @@ function tweet() {
 //   }
   
 
-export default tweet
+export default Tweet

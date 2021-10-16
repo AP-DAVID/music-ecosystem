@@ -178,9 +178,9 @@ const handleSubmit = async() => {
               {/*footer*/}
               <div className="flex w-full items-center justify-between p-6 border-t border-solid border-blueGray-200 rounded-b">
                 
-                <div className="w-10">
+                <div className="w-10 ">
                        <label
-                            className="">
+                            className="items-center">
                                 <CameraIcon className="h-10 text-blue-500 hover:text-red-500 w-10 cursor-pointer"/>
                                 <input type='file' name='image' accept="image/*"
                                 
