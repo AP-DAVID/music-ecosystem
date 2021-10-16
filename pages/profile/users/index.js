@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react';
 import {signOut} from "next-auth/client";
 import Individual from "../../../search/individualsearch"
 import Artist from "../../../search/artistsearch"
-import { getSession } from "next-auth/client"
+import { useSession } from "next-auth/client"
 import Label from "../../../search/labelsearch"
 import Videography from "../../../search/videograph"
 import {useRouter, withRouter} from 'next/router'
@@ -20,9 +20,12 @@ import Oops from "../../../search/openModal"
 
 
 
-const Dashboard = ({session}) => {
+const Dashboard = () => {
   const router = useRouter()
   const useStyles = makeStyles(styles);
+
+  const [session, loading] = useSession();
+
   const classes = useStyles();
   const[load, setLoad] = useState(false);
   const [responsee, setResponse] = useState()
@@ -33,8 +36,8 @@ const Dashboard = ({session}) => {
   const[videogr, setVideogr] = useState(false);
   const[bsearch, setSearch] = useState(false);
  
-  
-  
+  console.log(session);
+
   const [form, setForm] = useState(
     {
     username: '',
@@ -112,6 +115,20 @@ const onSearch = async(value) =>{
 } 
 
 
+
+if(loading){
+  return (
+      
+    <div class="w-full h-full  fixed block top-0 left-0 bg-white opacity-75 z-50">
+                    <link rel="stylesheet" href="https://pagecdn.io/lib/font-awesome/5.10.0-11/css/all.min.css" integrity="sha256-p9TTWD+813MlLaxMXMbTA7wN/ArzGyW/L7c5+KkjOkM=" crossorigin="anonymous" />
+                    <span class="text-blue-500 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0" style={{top : "50%"}} 
+                    >
+                        <i class="fab fa-spinner fa-spin fa-5x"></i>
+                        {/* <DotsCircleHorizontalIcon className="h-40 w-40 animate-spin" /> */}
+                    </span>
+    </div>
+  )
+}
 
 
 
@@ -223,12 +240,6 @@ const goChat = async() =>{
 
 }
 
-export async function getServerSideProps(ctx) {
-  return {
-    props: {
-      session: await getSession(ctx)
-    }
-  }
-}
+
 
 export default Dashboard;

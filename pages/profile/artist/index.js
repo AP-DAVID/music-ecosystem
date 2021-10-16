@@ -10,14 +10,15 @@ import Label from "../../../search/labelsearch"
 import Videography from "../../../search/videograph"
 
 import {useRouter} from 'next/router'
-import {signOut, getSession } from "next-auth/client";
+import {signOut, getSession, useSession } from "next-auth/client";
 import axios from 'axios';
 import Sbody from "../../../search/bodysearch"
 import Oops from "../../../search/openModal"
 
-export default function Artistt({session}) {
+export default function Artistt() {
   const router = useRouter()
   const [responsee, setResponse] = useState()
+  const [session, loading] = useSession();
   const[content, setContent] = useState(true);
   const[iu, setIU] = useState(false)
   const[musicart, setMusicart] = useState(false);
@@ -92,6 +93,20 @@ const onSearch = async(value) =>{
     }
   }
 } 
+
+if(loading){
+  return (
+      
+    <div class="w-full h-full  fixed block top-0 left-0 bg-white opacity-75 z-50">
+                    <link rel="stylesheet" href="https://pagecdn.io/lib/font-awesome/5.10.0-11/css/all.min.css" integrity="sha256-p9TTWD+813MlLaxMXMbTA7wN/ArzGyW/L7c5+KkjOkM=" crossorigin="anonymous" />
+                    <span class="text-blue-500 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0" style={{top : "50%"}} 
+                    >
+                        <i class="fab fa-spinner fa-spin fa-5x"></i>
+                        {/* <DotsCircleHorizontalIcon className="h-40 w-40 animate-spin" /> */}
+                    </span>
+    </div>
+  )
+}
 
 
   if (!session || session.user.section != "music artist"){
@@ -177,10 +192,3 @@ const onSearch = async(value) =>{
 }
 
 
-export async function getServerSideProps(ctx) {
-  return {
-    props: {
-      session: await getSession(ctx)
-    }
-  }
-}
