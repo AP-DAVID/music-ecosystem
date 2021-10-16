@@ -47,7 +47,7 @@ export default function Chatbox({handleSubmit, conversations, setNewMessage, new
                 </div>
                 <div className={`${styles.chatBoxBottom} mt-6 bottom-0`}>
                     <textarea
-                      className="rounded-l-full rounded-tl-none rounded-r-full h-16 sm:h-20 w-11/12 sm:w-5/6"
+                      className="rounded-l-full rounded-tl-none rounded-r-full h-16 sm:h-20 w-full sm:w-5/6"
                       placeholder="write something..."
                       onChange={(e) => setNewMessage(e.target.value)}
                       value={newMessage}
