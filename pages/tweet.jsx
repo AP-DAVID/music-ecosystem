@@ -93,7 +93,7 @@ function tweet() {
 
                 </div>
 
-                <RefreshIcon onClick={refreshNow} className={`h-7 ml-3 mt-3 w-7 text-right ${spin? "animate-spin" : "animate-none"} text-blue-500`}/>
+                {/* <RefreshIcon onClick={refreshNow} className={`h-7 ml-3 mt-3 w-7 text-right ${spin? "animate-spin" : "animate-none"} text-blue-500`}/> */}
 
                {!change ? ( <div className="sm:px-5  my-10 sm:mr:10 justify-items-stretch sm:space-x-3 sm:grid md:grid:cols-2 lg:grid-cols-2 xl:grid-cols-3 3xl:flex flex-wrap justify-center">
                   
