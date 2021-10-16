@@ -1,17 +1,65 @@
 import Admin from "../components/Admin"
-import {signOut, getSession } from "next-auth/client"
+import {signOut, getSession, useSession } from "next-auth/client"
 import Tweetbox from "../components/Tweetbox"
 import { Icon } from 'semantic-ui-react'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Profiletweet from "../components/Profiletweet"
 import TweetModal from "../tweetComponent/tweetModal"
 import { useRouter } from 'next/router';
+import Oops from "../search/openModal"
+import axios from "axios"
 
-function tweet({session, data}) {
+function tweet() {
 
    const [change, setChange] = useState(false);
+   const [data, setData] = useState();
+   const [session, loading] = useSession();
    const [showModal, setShowModal] = useState(false);
    const router = useRouter();
+
+
+   console.log(data)
+
+
+
+   useEffect(() => {
+     
+     const datta = async() => {
+
+      const res = await axios.get(`/api/tweet/${session?.user?._id}`)
+      console.log(res)
+      
+      setData(res.data.reverse());
+      
+     }
+
+     datta();
+     
+   },[session, router])
+
+
+   if(loading){
+    return (
+        
+      <div class="w-full h-full  fixed block top-0 left-0 bg-white opacity-75 z-50">
+                      <link rel="stylesheet" href="https://pagecdn.io/lib/font-awesome/5.10.0-11/css/all.min.css" integrity="sha256-p9TTWD+813MlLaxMXMbTA7wN/ArzGyW/L7c5+KkjOkM=" crossorigin="anonymous" />
+                      <span class="text-blue-500 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0" style={{top : "50%"}} 
+                      >
+                          <i class="fab fa-twitter fa-spin fa-5x"></i>
+                          {/* <DotsCircleHorizontalIcon className="h-40 w-40 animate-spin" /> */}
+                      </span>
+      </div>
+    )
+  }
+  
+  
+    if (!session && !loading){
+      return (
+          <main>
+              <Oops />
+          </main>
+      )
+    }
 
 
 
@@ -83,23 +131,23 @@ function tweet({session, data}) {
     )
 }
 
-export async function getServerSideProps(ctx) {
+// export async function getStaticProps(ctx) {
 
-  const session = await getSession(ctx);
+//   const session = await getSession(ctx);
 
-  const res = await fetch(`https://muscotest5a.vercel.app/api/tweet/${session.user._id}`)
-  const dataa = await res.json()
-  const data = dataa.reverse();
+//   const res = await fetch(`https://muscotest5a.vercel.app/api/tweet/${session.user._id}`)
+//   const dataa = await res.json()
+//   const data = dataa.reverse();
 
 
 
-    return {
-      props: {
-        session,
-        data,
-      }
-    }
-  }
+//     return {
+//       props: {
+//         session,
+//         data,
+//       }
+//     }
+//   }
   
 
 export default tweet
