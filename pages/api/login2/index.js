@@ -23,7 +23,6 @@ handler.post(async(req, res) =>{
                 res.status(400).json("Wrong Password");
             }else{
                 res.status(200).json(login)
-                console.log("Successfully logged in")
             }
             
         }

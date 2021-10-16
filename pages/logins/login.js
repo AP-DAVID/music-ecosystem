@@ -47,28 +47,21 @@ export default function Login() {
 
 
 const handleSubmit = async(e) =>{
-      const config = {
-        headers: {
-            "Accept" : "application/json",
-            'Content-type' : "application/json"
-        }
-      }
+      // const config = {
+      //   headers: {
+      //       "Accept" : "application/json",
+      //       'Content-type' : "application/json"
+      //   }
+      // }
       
       if( form.email !== '' && form.password !== ''){
 
         try{
           
-          const response = await axios.post('/api/login', JSON.stringify(form) , config)
-          console.log(response)
-          if(response.data === "User not found"){
-            setValidation("The User does not Exist.");
-          }
-          else if(response.data === "Wrong Password"){
-            setValidation("Invalid Password?");
-          }
-          else{
+          
+         
               signIn("email-login", {email: form.email, password : form.password})
-          }
+          
           
 
           
@@ -88,9 +81,7 @@ const handleSubmit = async(e) =>{
     
 }
 
-const handlegit = async(e) =>{
-  signIn("auth0");
-}
+
 
 useEffect(() =>{
 
@@ -98,12 +89,6 @@ useEffect(() =>{
     const bom = async () => {
   
     
-      const config = {
-      headers: {
-          "Accept" : "application/json",
-          'Content-type' : "application/json"
-      }
-    }
   
       try{
         

@@ -30,9 +30,7 @@ import axios from "axios";
                     })
 
                      const user = await res.json();
-                    
-                    console.log(user)
-                    
+                                        
                     if(user){
                         return user
                     }
@@ -44,19 +42,6 @@ import axios from "axios";
                 }
             }
 
-        }),
-        Providers.GitHub({
-            id: "github", 
-            clientId: process.env.GITHUB_ID,
-            clientSecret : process.env.GITHUB_SECRET
-
-        }),
-        Providers.Auth0({
-            id: "auth0", 
-            clientId : process.env.AUTH0_CLIENT_ID,
-            clientSecret : process.env.AUTH0_CLIENT_SECRET,
-            domain : process.env.AUTH0_DOMAIN,
-            
         })
        
     ]
