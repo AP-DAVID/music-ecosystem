@@ -6,6 +6,7 @@ import {useEffect, useState, useRef} from 'react'
 import axios from 'axios'
 import { io } from "socket.io-client";
 import Oops from "../../search/openModal"
+import { useRouter } from 'next/router';
 
 
 
@@ -18,6 +19,7 @@ export default function Chat({session}){
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const scrollRef = useRef();
     const [newMessage, setNewMessage] = useState("");
+    const router = useRouter();
       
 
 
@@ -115,12 +117,18 @@ export default function Chat({session}){
           try {
             const res = await axios.post("/api/messages", message);
             setMessages([...messages, res.data]);
+            refreshData();
             setNewMessage("");
+
           } catch (err) {
             console.log(err);
           }
 
       };
+
+      const refreshData = () => {
+        router.replace(router.asPath);
+      }
 
 
      
