@@ -39,7 +39,7 @@ useEffect(() => {
             {/* Image */}
 
             {data?.picture && (
-                <div onClick={() => setOpen(true)} className="cursor-pointer"> 
+                <div onClick={() => setOpen(true)} className="w-full cursor-pointer"> 
                   <img src={data.picture} className="rounded-lg w-full max-h-40 object-cover cursor-pointer"/>
                 </div>
             )}
@@ -104,7 +104,7 @@ useEffect(() => {
                 </div>
                 
                 <div className="flex items-center">
-                    <UserIcon className="h-4 w-4"/>
+                    <div><UserIcon className="h-4"/></div>
                     <div><h1 className="text-xs font-extralight">{`see ${user?.username} other Tweets`}</h1></div>
                 </div>
             </div>
