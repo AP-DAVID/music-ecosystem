@@ -38,11 +38,11 @@ const dashboardRoutes = [
   },
   {
     path: "/",
-    name: "Albums",
+    name: "Music",
     rtlName: "ألبومات",
     icon: "content_paste",
 
-    layout: "/albums",
+    layout: "/music",
   },
   {
     path: "/",
