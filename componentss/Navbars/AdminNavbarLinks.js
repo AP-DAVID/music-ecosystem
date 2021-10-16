@@ -27,7 +27,7 @@ import Button from "..//CustomButtons/Button.js";
 import useWindowSize from "../Hooks/useWindowSize.js";
 
 import styles from "../../assets/jss/nextjs-material-dashboard/components/headerLinksStyle.js";
-import ProfileModal from "../../components/profileModal";
+import ProfileModal from "../../tweetComponent/profileModal";
 
 export default function AdminNavbarLinks({onSearch, onLogout, session}) {
   const router = useRouter()

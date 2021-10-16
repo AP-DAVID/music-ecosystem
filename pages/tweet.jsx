@@ -1,19 +1,21 @@
 import Admin from "../components/Admin"
 import {signOut, getSession, useSession } from "next-auth/client"
-import Tweetbox from "../components/Tweetbox"
+import Tweetbox from "../tweetComponent/Tweetbox"
 import { Icon } from 'semantic-ui-react'
 import { useEffect, useState } from "react"
-import Profiletweet from "../components/Profiletweet"
+import Profiletweet from "../tweetComponent/Profiletweet"
 import TweetModal from "../tweetComponent/tweetModal"
 import { useRouter } from 'next/router';
 import Oops from "../search/openModal"
 import axios from "axios"
+import {RefreshIcon} from "@heroicons/react/outline"
 
 function tweet() {
 
    const [change, setChange] = useState(false);
    const [data, setData] = useState();
    const [session, loading] = useSession();
+   const [spin, setSpin] = useState(false);
    const [showModal, setShowModal] = useState(false);
    const router = useRouter();
 
@@ -63,6 +65,12 @@ function tweet() {
     router.replace(router.asPath);
   }
 
+  const refreshNow = async() => {
+    setSpin(true)
+    await router.replace(router.asPath);
+    setSpin(false);
+  }
+
     return (
         <Admin session={session} userPicture={session.user.profilePicture} userName={session.user.username}>
 
@@ -78,7 +86,14 @@ function tweet() {
                     <div onClick={() => setChange(true)} className={`flex cursor-pointer rounded-r-full rounded-l-full h-full w-1/2 justify-center items-center align-middle ${change ? "shadow-md bg-gray-900" : "bg-gray-100"}`}>
                        <h2 className={`text-md cursor-pointer ${change? "text-white" : "text-black"} font-medium`}>Profile</h2>
                     </div>
+
+
+                    
+
+
                 </div>
+
+                <RefreshIcon onClick={refreshNow} className={`h-7 ml-3 mt-3 w-7 text-right ${spin? "animate-spin" : "animate-none"} text-blue-500`}/>
 
                {!change ? ( <div className="sm:px-5  my-10 sm:mr:10 justify-items-stretch sm:space-x-3 sm:grid md:grid:cols-2 lg:grid-cols-2 xl:grid-cols-3 3xl:flex flex-wrap justify-center">
                   
@@ -91,7 +106,7 @@ function tweet() {
                   
 
                 
-                  data?.map((content) =>
+                  data?.map((content) =>  
                       
                       (
 

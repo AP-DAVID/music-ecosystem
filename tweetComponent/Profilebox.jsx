@@ -1,9 +1,11 @@
 import {ChevronDownIcon, ChatIcon, ArrowsExpandIcon, ChevronUpIcon, HeartIcon} from "@heroicons/react/outline"
 import { Content } from "antd/lib/layout/layout";
 import { useState } from "react";
+import ImageViewer from "./imageViewer";
 
 function Profilebox({session, data}) {
     const [change, setChange] = useState(true);
+    const [open, setOpen] = useState(false)
     return (
         <div>
              
@@ -27,10 +29,14 @@ function Profilebox({session, data}) {
                     <div className="mb-5 mt-3">
                       <h1 className="text-sm font-semibold">{data?.text}</h1>
                       
-                      {data?.picture && (<img src={data?.picture} className="h-48 w-96 py-2 object-cover rounded-xl"/>)}
+                      {data?.picture && (<img src={data?.picture} onClick={() => setOpen(true)} className="h-48 w-96 cursor-pointer py-2 object-cover rounded-xl"/>)}
                     
                     </div>
                  )}
+
+            {open && (
+                <ImageViewer setOpen={setOpen} open={open} image={data?.picture} />
+            )}
              
                 <div className="flex justify-around w-full mb-3 mr-6">
                     <ChatIcon className="h-5 w-5 text-blue-500"/>

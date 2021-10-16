@@ -3,14 +3,15 @@ import {HeartIcon, UserIcon} from "@heroicons/react/outline"
 import {useEffect, useState} from 'react';
 import axios from "axios";
 import Moment from 'react-moment';
+import ImageViewer from "./imageViewer";
 
 
 
 function Tweetbox({session, data}) {
     const [user, setUser] = useState()
+    const [open, setOpen] = useState(false)
 
 
-    console.log(user?.username)
 
   
 
@@ -38,9 +39,14 @@ useEffect(() => {
             {/* Image */}
 
             {data?.picture && (
-                <div>
+                <div onClick={() => setOpen(true)} className="cursor-pointer"> 
                   <img src={data.picture} className="rounded-lg w-full max-h-40 object-cover cursor-pointer"/>
                 </div>
+            )}
+
+
+            {open && (
+                <ImageViewer setOpen={setOpen} open={open} image={data?.picture} />
             )}
 
             {/* https://youtu.be/dBotWYKYYWc https://www.youtube.com/embed/zihoyz0u_cs */}
