@@ -36,7 +36,7 @@ const Dashboard = () => {
   const[videogr, setVideogr] = useState(false);
   const[bsearch, setSearch] = useState(false);
  
-  console.log(session);
+
 
   const [form, setForm] = useState(
     {

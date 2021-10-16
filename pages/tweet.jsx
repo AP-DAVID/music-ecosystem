@@ -18,16 +18,12 @@ function tweet() {
    const router = useRouter();
 
 
-   console.log(data)
-
-
 
    useEffect(() => {
      
      const datta = async() => {
 
       const res = await axios.get(`/api/tweet/${session?.user?._id}`)
-      console.log(res)
       
       setData(res.data.reverse());
       
