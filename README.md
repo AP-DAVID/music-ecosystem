@@ -1,4 +1,4 @@
-**PROJECT'S NAME : **MUSIC ECOSYSTEM(MUSCO)
+**PROJECT'S NAME : **MUSIC ECOSYSTEM(MUSCO)**
 
 **PROJECT'S DESCRIPTION**
 Musco provides the user with an ecosystem of sections providing services and functionalities.
