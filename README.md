@@ -1,4 +1,4 @@
-**PROJECT'S NAME : **MUSIC ECOSYSTEM(MUSCO)**
+**PROJECT'S NAME** : **MUSIC ECOSYSTEM(MUSCO)**
 
 **PROJECT'S DESCRIPTION**
 Musco provides the user with an ecosystem of sections providing services and functionalities.
@@ -22,8 +22,7 @@ The record labels can hire/sign music artist, connect with videographers and oth
 
 Each section is able to send in a music tweet in the web application
 
-**HOW TO INSTALL AND RUN THE PROJECT
-**
+**HOW TO INSTALL AND RUN THE PROJECT**
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
