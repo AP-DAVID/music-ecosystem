@@ -9,6 +9,7 @@ const Oops = () => {
 
     return ( 
         <div className="container" style={{display:"flex", flexDirection : "column", justifyContent : "center"}}>
+            {/* 403 status page */}
             <div style={{display:"flex", flexDirection : "column", justifyContent : "center"}}>
                 <Result
                     status="403"

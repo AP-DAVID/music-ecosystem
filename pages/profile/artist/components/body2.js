@@ -1,7 +1,7 @@
-const Body2 = ({userName, userEmail, section, userDescription}) => {
-    return ( 
-        <>
-            <main className="profile-page">
+const Body2 = ({ userName, userEmail, section, userDescription }) => {
+  return (
+    <>
+      <main className="profile-page">
         <section className="relative block h-500-px">
           <div
             className="absolute top-0 w-full h-full bg-center bg-cover"
@@ -73,9 +73,7 @@ const Body2 = ({userName, userEmail, section, userDescription}) => {
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
                           10
                         </span>
-                        <span className="text-sm text-blueGray-400">
-                          likes
-                        </span>
+                        <span className="text-sm text-blueGray-400">likes</span>
                       </div>
                       <div className="lg:mr-4 p-3 text-center">
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
@@ -109,7 +107,7 @@ const Body2 = ({userName, userEmail, section, userDescription}) => {
                   <div className="flex flex-wrap justify-center">
                     <div className="w-full lg:w-9/12 px-4">
                       <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                       {userDescription}
+                        {userDescription}
                       </p>
                       <a
                         href="#pablo"
@@ -126,8 +124,8 @@ const Body2 = ({userName, userEmail, section, userDescription}) => {
           </div>
         </section>
       </main>
-        </>
-     )
-}
- 
+    </>
+  );
+};
+
 export default Body2;

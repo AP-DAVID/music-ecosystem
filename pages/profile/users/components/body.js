@@ -1,7 +1,7 @@
-const Body = ({userName, userEmail, userDescription, section}) => {
-    return ( 
-        <>
-            <main className="profile-page">
+const Body = ({ userName, userEmail, userDescription, section }) => {
+  return (
+    <>
+      <main className="profile-page">
         <section className="relative block h-500-px">
           <div
             className="absolute top-0 w-full h-full bg-center bg-cover"
@@ -88,9 +88,7 @@ const Body = ({userName, userEmail, userDescription, section}) => {
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
                           89
                         </span>
-                        <span className="text-sm text-blueGray-400">
-                          likes
-                        </span>
+                        <span className="text-sm text-blueGray-400">likes</span>
                       </div>
                     </div>
                   </div>
@@ -133,8 +131,8 @@ const Body = ({userName, userEmail, userDescription, section}) => {
           </div>
         </section>
       </main>
-        </>
-     )
-}
- 
+    </>
+  );
+};
+
 export default Body;

@@ -1,31 +1,28 @@
-import React from 'react'
-import { Button, Header, Icon, Modal } from 'semantic-ui-react'
+import React from "react";
+import { Button, Header, Icon, Modal } from "semantic-ui-react";
 
-function ImageViewer({setOpen, open, image}) {
-  
-
+function ImageViewer({ setOpen, open, image }) {
   return (
     <Modal
       basic
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      size='small'
+      size="small"
       trigger={<Button>Basic Modal</Button>}
     >
-      
+      {/* for viewing an image on fullscreen after being clicked by a user */}
       <Modal.Content>
-        <img src={image} className="w-11/12 rounded-xl h-full object-cover "/>
+        <img src={image} className="w-11/12 rounded-xl h-full object-cover " />
       </Modal.Content>
 
       <Modal.Actions>
-        <Button basic color='red' inverted onClick={() => setOpen(false)}>
-          <Icon name='remove' />
+        <Button basic color="red" inverted onClick={() => setOpen(false)}>
+          <Icon name="remove" />
         </Button>
-      
       </Modal.Actions>
     </Modal>
-  )
+  );
 }
 
-export default ImageViewer
+export default ImageViewer;

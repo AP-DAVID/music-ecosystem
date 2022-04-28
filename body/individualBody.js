@@ -1,7 +1,7 @@
-const Body = ({register, onfollow, onChat}) => {
-    return ( 
-        <>
-            <main className="profile-page">
+const Body = ({ register, onfollow, onChat }) => {
+  return (
+    <>
+      <main className="profile-page">
         <section className="relative block h-500-px">
           <div
             className="absolute top-0 w-full h-full bg-center bg-cover"
@@ -44,7 +44,11 @@ const Body = ({register, onfollow, onChat}) => {
                     <div className="relative">
                       <img
                         alt="..."
-                        src={register.profilePicture ? register.profilePicture :  "https://media.istockphoto.com/photos/human-crowd-forming-man-icon-on-white-background-picture-id1255580484?b=1&k=20&m=1255580484&s=170667a&w=0&h=DtN1uEUvi1NXTN-S6v3rfPY1oHK2BW5pzeWZf_Jx_2s="}
+                        src={
+                          register.profilePicture
+                            ? register.profilePicture
+                            : "https://media.istockphoto.com/photos/human-crowd-forming-man-icon-on-white-background-picture-id1255580484?b=1&k=20&m=1255580484&s=170667a&w=0&h=DtN1uEUvi1NXTN-S6v3rfPY1oHK2BW5pzeWZf_Jx_2s="
+                        }
                         className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                       />
                     </div>
@@ -90,9 +94,7 @@ const Body = ({register, onfollow, onChat}) => {
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
                           2
                         </span>
-                        <span className="text-sm text-blueGray-400">
-                          likes
-                        </span>
+                        <span className="text-sm text-blueGray-400">likes</span>
                       </div>
                     </div>
                   </div>
@@ -135,8 +137,8 @@ const Body = ({register, onfollow, onChat}) => {
           </div>
         </section>
       </main>
-        </>
-     )
-}
- 
+    </>
+  );
+};
+
 export default Body;

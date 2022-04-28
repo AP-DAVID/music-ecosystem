@@ -1,7 +1,7 @@
 import Admin from "../components/Admin.js";
 import { signOut, getSession } from "next-auth/client";
 
-function favourite({ session }) {
+function Music({ session }) {
   return (
     <Admin
       session={session}
@@ -9,7 +9,7 @@ function favourite({ session }) {
       userName={session.user.username}
     >
       <div>
-        <h1>Favourites</h1>
+        <h1>Albums heepeee</h1>
       </div>
     </Admin>
   );
@@ -23,4 +23,4 @@ export async function getServerSideProps(ctx) {
   };
 }
 
-export default favourite;
+export default Music;

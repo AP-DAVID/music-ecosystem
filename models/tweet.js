@@ -2,40 +2,39 @@ const mongoose = require("mongoose");
 
 const TweetsSchema = new mongoose.Schema(
   {
-    userId :{
-        type : String,
-        required : true
+    userId: {
+      type: String,
+      required: true,
     },
-    picture : {
-        type : String,
+    picture: {
+      type: String,
     },
-    followers : {
-        type : Array,
-        default : []
+    followers: {
+      type: Array,
+      default: [],
     },
-    following : {
-        type : Array,
-        default : []
+    following: {
+      type: Array,
+      default: [],
     },
-    music  : {
-        type : String,
-        default : ""
+    music: {
+      type: String,
+      default: "",
     },
-    text : {
-        type : String,
+    text: {
+      type: String,
     },
-    likes : {
-        type : Array,
-        default : []
+    likes: {
+      type: Array,
+      default: [],
     },
     date: {
-        type: Date,
-        default: Date.now
+      type: Date,
+      default: Date.now,
     },
-    
-
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.models.Tweets || mongoose.model("Tweets", TweetsSchema);
+module.exports =
+  mongoose.models.Tweets || mongoose.model("Tweets", TweetsSchema);

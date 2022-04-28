@@ -17,11 +17,22 @@ import styles from "../assets/jss/nextjs-material-dashboard/layouts/adminStyle.j
 
 import bgImage from "../assets/img/sidebar-2.jpg";
 import logo from "../assets/img/reactlogo.png";
-import {motion} from 'framer-motion';
+import { motion } from "framer-motion";
 
 let ps;
 
-export default function Admin({goChat, goHome, onLogout, session, userPicture, onSearch, userName, userEmail, children, ...rest}) {
+export default function Admin({
+  goChat,
+  goHome,
+  onLogout,
+  session,
+  userPicture,
+  onSearch,
+  userName,
+  userEmail,
+  children,
+  ...rest
+}) {
   // used for checking current route
   const router = useRouter();
   // styles
@@ -36,21 +47,20 @@ export default function Admin({goChat, goHome, onLogout, session, userPicture, o
   const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const Variants ={
-    hidden :{
-       opacity : 0.5,
+  const Variants = {
+    hidden: {
+      opacity: 0.5,
     },
-  
-    visible : {
-        opacity : 1,
-        transition : {delay : 0.5, duration : 2}
+
+    visible: {
+      opacity: 1,
+      transition: { delay: 0.5, duration: 2 },
     },
-    exit : {
-      x : '-100vw',
-      transition : {ease : 'easeInOut', duration : 0.5}
-  
-    }
-  }
+    exit: {
+      x: "-100vw",
+      transition: { ease: "easeInOut", duration: 0.5 },
+    },
+  };
 
   const handleImageClick = (image) => {
     setImage(image);
@@ -96,20 +106,17 @@ export default function Admin({goChat, goHome, onLogout, session, userPicture, o
   }, [mainPanel]);
   return (
     <motion.div
-     className={classes.wrapper}
-     variants = {Variants}
-    initial = "hidden"
-    animate="visible"
-    exit="exit"
+      className={classes.wrapper}
+      variants={Variants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
     >
-
-      
       <Sidebar
         userPicture={userPicture}
         routes={routes}
         logoText={"Musco"}
         logo={logo}
-
         image={image}
         handleDrawerToggle={handleDrawerToggle}
         open={mobileOpen}
@@ -118,13 +125,13 @@ export default function Admin({goChat, goHome, onLogout, session, userPicture, o
       />
       <div className={classes.mainPanel} ref={mainPanel}>
         <Navbar
-          goChat = {goChat}
-          goHome = {goHome}
-          onLogout = {onLogout}
-          onSearch = {onSearch}
-          session = {session}
-          userEmail = {userEmail}
-          userName = {userName}
+          goChat={goChat}
+          goHome={goHome}
+          onLogout={onLogout}
+          onSearch={onSearch}
+          session={session}
+          userEmail={userEmail}
+          userName={userName}
           routes={routes}
           handleDrawerToggle={handleDrawerToggle}
           {...rest}

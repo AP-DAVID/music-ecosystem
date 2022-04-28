@@ -2,20 +2,21 @@ const mongoose = require("mongoose");
 
 const MessageSchema = new mongoose.Schema(
   {
-    conversationId :{
-        type : String,
+    conversationId: {
+      type: String,
     },
     sender: {
-       type: String,
+      type: String,
     },
-    profile : {
-      type : String,
+    profile: {
+      type: String,
     },
-    text : {
-        type : String,
+    text: {
+      type: String,
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.models.Message || mongoose.model("Message", MessageSchema);
+module.exports =
+  mongoose.models.Message || mongoose.model("Message", MessageSchema);

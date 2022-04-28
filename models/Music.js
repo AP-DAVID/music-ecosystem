@@ -2,40 +2,39 @@ const mongoose = require("mongoose");
 
 const MusicsSchema = new mongoose.Schema(
   {
-    userId :{
-        type : String,
-        required : true
+    userId: {
+      type: String,
+      required: true,
     },
-    picture : {
-        type : String,
+    picture: {
+      type: String,
     },
-    music  : {
-        type : String,
-        default : ""
+    music: {
+      type: String,
+      default: "",
     },
-    name : {
-        type : String,
+    name: {
+      type: String,
     },
-    artist : {
-        type : String,
-        default : ""
+    artist: {
+      type: String,
+      default: "",
     },
-    likes : {
-        type : Array,
-        default : []
+    likes: {
+      type: Array,
+      default: [],
     },
-    comment : {
-        type : Array,
-        default : []
+    comment: {
+      type: Array,
+      default: [],
     },
     date: {
-        type: Date,
-        default: Date.now
+      type: Date,
+      default: Date.now,
     },
-    
-
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.models.Musics || mongoose.model("Musics", MusicsSchema);
+module.exports =
+  mongoose.models.Musics || mongoose.model("Musics", MusicsSchema);

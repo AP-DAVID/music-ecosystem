@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
-import { motion } from "framer-motion"
-import styles from './Slickdiv.module.css'
-import Musiccard from './Musiccard'
+import { motion } from "framer-motion";
+import styles from "./Slickdiv.module.css";
+import Musiccard from "./Musiccard";
 
 const NextArrow = ({ onClick }) => {
   return (
@@ -41,17 +41,17 @@ const Slickdiv = ({ images, slidesToShow = 3 }) => {
         breakpoint: 1490,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1
-        }
+          slidesToScroll: 1,
+        },
       },
       {
         breakpoint: 820,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   const templateImages = images?.map((image, idx) => {
@@ -60,10 +60,7 @@ const Slickdiv = ({ images, slidesToShow = 3 }) => {
         <div
           className={idx === imageIndex ? "activeSlide" : styles.slide}
           key={image.id}
-          
-          
         >
-
           {/* <motion.div
            className="slideWrapper"
            whileHover={{ scale: 1.1 }}
@@ -72,9 +69,13 @@ const Slickdiv = ({ images, slidesToShow = 3 }) => {
           >
             {image.code ? image.code : <img src={image.picture} alt="placeholder Image" />}
           </motion.div> */}
- 
-          <Musiccard source={image.picture} song={image.src} text={image.text} artist = {image.artist} />
 
+          <Musiccard
+            source={image.picture}
+            song={image.src}
+            text={image.text}
+            artist={image.artist}
+          />
         </div>
       );
     }

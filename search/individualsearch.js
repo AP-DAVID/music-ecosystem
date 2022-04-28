@@ -2,108 +2,113 @@ import React, { useState } from "react";
 
 import Navbar from "../components/Navbars/AuthNavbar.js";
 import Footer from "../components/Footers/Footer.js";
-import Body from '../body/individualBody'
-import {useRouter} from 'next/router'
-import axios from 'axios'
-import {getUser} from '../fetchdata/registerFetcher'
+import Body from "../body/individualBody";
+import { useRouter } from "next/router";
+import axios from "axios";
+import { getUser } from "../fetchdata/registerFetcher";
 
-export default function Individual({id, logins}) {
-  const router = useRouter()
-  const {register, isLoading, isError} = getUser(id)
-  const [form, setForm] = useState(
-    {
+export default function Individual({ id, logins }) {
+  const router = useRouter();
+  const { register, isLoading, isError } = getUser(id);
+  const [form, setForm] = useState({
     senderId: logins?._id,
-    receiverId : '',
-  }
- )
+    receiverId: "",
+  });
 
- const [form2, setForm2] = useState(
-  {
-   userId : logins._id,
-  }
-)
+  const [form2, setForm2] = useState({
+    userId: logins._id,
+  });
+  // function to follow user after the follow buton have been clicked
+  const onfollow = async () => {
+    const config = {
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
+    };
 
- const onfollow = async () =>{
-  const config = {
-    headers: {
-        "Accept" : "application/json",
-        'Content-type' : "application/json"
+    try {
+      const response = await axios.put(
+        `/api/followLogic/${id}`,
+        JSON.stringify(form2),
+        config
+      );
+      console.log("followed succesfully");
+    } catch (error) {
+      console.log(error);
     }
+  };
+
+  if (isError) {
+    return <p>An error Occured</p>;
   }
-
-    try{
-      const response = await axios.put(`/api/followLogic/${id}`, JSON.stringify(form2), config)
-      console.log("followed succesfully")
-
-     
-      
-    }catch(error){
-        console.log(error)
-    }
-    
- }
-
-
-
-  if(isError){return (<p>An error Occured</p>)}
-  if(isLoading){
+  if (isLoading) {
     return (
-      <div class="ui segment" style={{display: "flex", flexDirection : "column", justifyContent : "center", height : '100vh' }}>
-          <div class="ui active inverted dimmer"style={{display: "flex", flexDirection : "row", justifyContent : "center", height : '100vh' }}>
-            <div class="ui medium text loader">Searching</div>
-          </div>
+      <div
+        class="ui segment"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          height: "100vh",
+        }}
+      >
+        <div
+          class="ui active inverted dimmer"
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+        >
+          <div class="ui medium text loader">Searching</div>
+        </div>
         <p></p>
         <p></p>
       </div>
-    )
+    );
   }
 
-  if (!register.username){
+  if (!register.username) {
     return (
-        <main>
-            <div>
-                <h1>
-                    User cannot be found
-                </h1>
-            </div>
-        </main>
-    )
+      <main>
+        <div>
+          <h1>User cannot be found</h1>
+        </div>
+      </main>
+    );
   }
-
-  const onChat = async () =>{
-
-    
-    setForm(form.receiverId = register._id);
+  // create a conversation when the chat botton have been clicked
+  const onChat = async () => {
+    setForm((form.receiverId = register._id));
 
     const config = {
       headers: {
-          "Accept" : "application/json",
-          'Content-type' : "application/json"
-      }
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
+    };
+
+    try {
+      const response = await axios.post(
+        "/api/conversations",
+        JSON.stringify(form),
+        config
+      );
+      console.log(response);
+      router.push({
+        pathname: "/messenger/chats",
+      });
+    } catch (error) {
+      console.log(error);
     }
-
-      try{
-        const response = await axios.post('/api/conversations', JSON.stringify(form) , config)
-        console.log(response)
-        router.push({
-          pathname: '/messenger/chats'
-      })
-      }catch(error){
-          console.log(error)
-      }
-      
-  }
-
-
-  
-
-  
+  };
 
   return (
     <>
-      
       <Navbar transparent />
-        <Body register={register} onChat={onChat}  onfollow={onfollow}/>
+      <Body register={register} onChat={onChat} onfollow={onfollow} />
       <Footer />
     </>
   );

@@ -1,25 +1,23 @@
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
 
-const Body3 = ({register, onfollow, text, onChat}) => {
-
-
-  const containerVariants ={
-    hidden :{
-        x : '-100vw',
+const Body3 = ({ register, onfollow, text, onChat }) => {
+  const containerVariants = {
+    hidden: {
+      x: "-100vw",
     },
 
-    visible : {
-        x : 0,
-        transition : {duration : 1.5, delay : 0.2, type : "spring", stiffness : 120}
+    visible: {
+      x: 0,
+      transition: { duration: 1.5, delay: 0.2, type: "spring", stiffness: 120 },
     },
-    exit : {
-        x : '-100vw',
-        transition : {ease : 'easeInOut'}
-    }
-}
-    return ( 
-        <>
-            <main className="profile-page">
+    exit: {
+      x: "-100vw",
+      transition: { ease: "easeInOut" },
+    },
+  };
+  return (
+    <>
+      <main className="profile-page">
         <section className="relative block h-500-px">
           <div
             className="absolute top-0 w-full h-full bg-center bg-cover"
@@ -59,16 +57,20 @@ const Body3 = ({register, onfollow, text, onChat}) => {
               <div className="px-6">
                 <div className="flex flex-wrap justify-center">
                   <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
-                    <motion.div 
-                     className="relative"
-                     variants = {containerVariants}
-                     initial = "hidden"
-                     animate="visible"
-                     exit="exit"
+                    <motion.div
+                      className="relative"
+                      variants={containerVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
                     >
                       <img
                         alt="..."
-                        src={register.profilePicture ? register.profilePicture :  "https://media.istockphoto.com/photos/human-hologram-of-people-crowd-picture-id1177346488?b=1&k=20&m=1177346488&s=170667a&w=0&h=_awbjaBImKOwWidDq7OwuIk1Ej8ml9YsmWdz8gTreww="}
+                        src={
+                          register.profilePicture
+                            ? register.profilePicture
+                            : "https://media.istockphoto.com/photos/human-hologram-of-people-crowd-picture-id1177346488?b=1&k=20&m=1177346488&s=170667a&w=0&h=_awbjaBImKOwWidDq7OwuIk1Ej8ml9YsmWdz8gTreww="
+                        }
                         className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                       />
                     </motion.div>
@@ -97,7 +99,6 @@ const Body3 = ({register, onfollow, text, onChat}) => {
                       >
                         View songs and albums
                       </button>
-
                     </div>
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-1">
@@ -114,9 +115,7 @@ const Body3 = ({register, onfollow, text, onChat}) => {
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
                           2
                         </span>
-                        <span className="text-sm text-blueGray-400">
-                          likes
-                        </span>
+                        <span className="text-sm text-blueGray-400">likes</span>
                       </div>
                       <div className="lg:mr-4 p-3 text-center">
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
@@ -150,7 +149,7 @@ const Body3 = ({register, onfollow, text, onChat}) => {
                   <div className="flex flex-wrap justify-center">
                     <div className="w-full lg:w-9/12 px-4">
                       <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                       {register.description}
+                        {register.description}
                       </p>
                       <a
                         href="#pablo"
@@ -167,8 +166,8 @@ const Body3 = ({register, onfollow, text, onChat}) => {
           </div>
         </section>
       </main>
-        </>
-     )
-}
- 
+    </>
+  );
+};
+
 export default Body3;

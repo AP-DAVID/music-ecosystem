@@ -1,6 +1,5 @@
 .messenger {
   display: flex;
-  
 }
 
 .chatMenu {
@@ -13,8 +12,6 @@
   border: none;
   border-bottom: 1px solid gray;
 }
-
-
 
 .chatBoxWrapper {
   display: flex;
@@ -80,14 +77,15 @@
     display: none;
   }
 
-  .chatBox{
+  .chatBox {
     flex: 10;
   }
 
-  .chatOnline{
+  .chatOnline {
     flex: 1px;
   }
-}.messenger {
+}
+.messenger {
   height: calc(100vh - 70px);
   display: flex;
 }
@@ -171,11 +169,11 @@
     display: none;
   }
 
-  .chatBox{
+  .chatBox {
     flex: 10;
   }
 
-  .chatOnline{
+  .chatOnline {
     flex: 1px;
   }
 }

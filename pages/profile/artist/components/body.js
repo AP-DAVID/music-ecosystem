@@ -1,50 +1,46 @@
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
 
-const Body = ({userName, userEmail, description, image, followers, following}) => {
-
-
-  const containerVariants ={
-    hidden :{
-        x : '-100vw',
+const Body = ({
+  userName,
+  userEmail,
+  description,
+  image,
+  followers,
+  following,
+}) => {
+  const containerVariants = {
+    hidden: {
+      x: "-100vw",
     },
 
-    visible : {
-        x : 0,
-        transition : {duration : 1.5, delay : 0.2, type : "spring", stiffness : 120}
+    visible: {
+      x: 0,
+      transition: { duration: 1.5, delay: 0.2, type: "spring", stiffness: 120 },
     },
-    exit : {
-        x : '-100vw',
-        transition : {ease : 'easeInOut'}
-    }
-}
+    exit: {
+      x: "-100vw",
+      transition: { ease: "easeInOut" },
+    },
+  };
 
-const Variants ={
-  hidden :{
-     opacity : 0,
-  },
+  const Variants = {
+    hidden: {
+      opacity: 0,
+    },
 
-  visible : {
-      opacity : 1,
-      transition : {delay : 0.5, duration : 2}
-  },
-  exit : {
-    x : '-100vw',
-    transition : {ease : 'easeInOut', duration : 0.5}
+    visible: {
+      opacity: 1,
+      transition: { delay: 0.5, duration: 2 },
+    },
+    exit: {
+      x: "-100vw",
+      transition: { ease: "easeInOut", duration: 0.5 },
+    },
+  };
 
-  }
-}
-
-
-
-
-
-
-
-
-
-    return ( 
-        <>
-            <main className="profile-page">
+  return (
+    <>
+      <main className="profile-page">
         <section className="relative block h-500-px">
           <div
             className="absolute top-0 w-full h-full bg-center bg-cover"
@@ -80,24 +76,28 @@ const Variants ={
         </section>
         <section className="relative py-16 bg-blueGray-200">
           <div className="container mx-auto px-4">
-            <motion.div 
-               className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
-               variants = {Variants}
-               initial = "hidden"
-               animate="visible"
-               exit="exit"
+            <motion.div
+              className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
+              variants={Variants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
             >
               <div className="px-6">
                 <div className="flex flex-wrap justify-center">
                   <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                     <div className="relative">
                       <motion.img
-                        variants = {containerVariants}
-                        initial = "hidden"
+                        variants={containerVariants}
+                        initial="hidden"
                         animate="visible"
                         exit="exit"
                         alt="..."
-                        src={image ? image : "https://media.istockphoto.com/photos/human-hologram-of-people-crowd-picture-id1177346488?b=1&k=20&m=1177346488&s=170667a&w=0&h=_awbjaBImKOwWidDq7OwuIk1Ej8ml9YsmWdz8gTreww="}
+                        src={
+                          image
+                            ? image
+                            : "https://media.istockphoto.com/photos/human-hologram-of-people-crowd-picture-id1177346488?b=1&k=20&m=1177346488&s=170667a&w=0&h=_awbjaBImKOwWidDq7OwuIk1Ej8ml9YsmWdz8gTreww="
+                        }
                         className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                       />
                     </div>
@@ -116,10 +116,10 @@ const Variants ={
                     <div className="flex justify-center py-4 lg:pt-4 pt-8">
                       <div className="mr-4 p-3 text-center">
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                         {followers}
+                          {followers}
                         </span>
                         <span className="text-sm text-blueGray-400">
-                         followers
+                          followers
                         </span>
                       </div>
                       <div className="mr-4 p-3 text-center">
@@ -132,11 +132,9 @@ const Variants ={
                       </div>
                       <div className="lg:mr-4 p-3 text-center">
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                         2
+                          2
                         </span>
-                        <span className="text-sm text-blueGray-400">
-                          likes
-                        </span>
+                        <span className="text-sm text-blueGray-400">likes</span>
                       </div>
                     </div>
                   </div>
@@ -162,7 +160,7 @@ const Variants ={
                   <div className="flex flex-wrap justify-center">
                     <div className="w-full lg:w-9/12 px-4">
                       <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                      {description}
+                        {description}
                       </p>
                       <a
                         href="#pablo"
@@ -179,8 +177,8 @@ const Variants ={
           </div>
         </section>
       </main>
-        </>
-     )
-}
- 
+    </>
+  );
+};
+
 export default Body;
