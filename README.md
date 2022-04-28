@@ -1,8 +1,38 @@
+**PROJECT'S NAME** : **MUSIC ECOSYSTEM(MUSCO)**
+
+**PROJECT'S DESCRIPTION**
+Musco provides the user with an ecosystem of sections providing services and functionalities.
+It includes five sections(Login sections) as follows : 
+1) user
+2) music artist, 
+3) videographers, 
+4) record labels
+
+**USER**
+An individual user is able to connect and listen to uploaded music from music artist, connect and hire videographers and record labels. The application also includes a messenger feature for prompt communication. 
+
+**MUSIC ARTIST**
+A music artistis able to upload music, connect with other artist, hire and connect with videographers and record labels.
+
+**VIDEOGRAPHERS**
+The videographers are able to get hired/booked, connect with other videographers, music artist and even record labels.
+
+**RECORD LABELS**
+The record labels can hire/sign music artist, connect with videographers and other record labels.
+
+Each section is able to send in a music tweet in the web application
+
+**HOW TO INSTALL AND RUN THE PROJECT**
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
+Git clone the respository,
 
-First, run the development server:
+then npm install 
+```bash 
+npm i or npm install
+```
+then run the development server:
 
 ```bash
 npm run dev
@@ -10,25 +40,11 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**HOW TO USE THE PROJECT**
+1) Choose the section that applies to you and click on the Register as "Section name"
+2) Create an account, entering your name, email and password etc
+3) Go to the login page and enter your credentials(email and password)
+4) You can search and follow other users from various sections etc
+Viola. 
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
